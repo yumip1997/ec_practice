@@ -1,7 +1,7 @@
 <template>
   <div>
     <display-category/>
-    <product-list />
+    <product-list/>
   </div>
 </template>
 
@@ -11,7 +11,20 @@ import DisplayCategory from "~/components/category/DisplayCategory";
 
 export default {
   name: "ProductDisplay",
-  components: {DisplayCategory, ProductList}
+  components: {DisplayCategory, ProductList},
+  data() {
+    return {}
+  },
+  head() {
+    return {
+      meta: [{
+        hid: 'description',
+        name: '클릭된 카테고리!',
+        content: '카테고리!',
+      }
+      ]
+    }
+  },
 }
 </script>
 

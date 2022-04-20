@@ -5,13 +5,7 @@
 
 <script>
 export default {
-  name: "DisplayCategory",
-
-  data() {
-    return {
-
-    }
-  },
+  name: "ProductCard"
 }
 </script>
 
