@@ -28,7 +28,7 @@ public class DispCateServiceImpl implements DispCateService {
     private List<DispCateDto> makeCateDtoList(List<DispCateVO> cateVOList){
         List<DispCateDto> cateDtoList = new ArrayList<>();
         setLgDepthCate(cateVOList, cateDtoList);
-
+        return cateDtoList;
     };
 
     private void setLgDepthCate(List<DispCateVO> cateVOList, List<DispCateDto> cateDtoList){

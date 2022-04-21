@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface DispCateService {
 
-    List<DispCateVO> getDispCateList()
+    List<DispCateVO> getDispCateList();
 }
