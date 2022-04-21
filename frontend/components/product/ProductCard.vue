@@ -5,11 +5,15 @@
     <el-card :body-style="{ padding: '0px' }">
       <img src="" class="image">
       <div style="padding: 14px;">
-        <span>{{prd.prdNm}}</span>
+        <span>
+          <nuxt-link :to="{name : 'display-product-prdNo', query : {prdNo : prd.prdNo}}">
+            {{prd.prdNm}}
+          </nuxt-link>
+        </span>
       </div>
     </el-card>
   </el-col>
-</el-row>    
+</el-row>
 </div>
 </template>
 
@@ -27,7 +31,7 @@ export default {
     font-size: 13px;
     color: #999;
   }
-  
+
   .bottom {
     margin-top: 13px;
     line-height: 12px;
@@ -48,7 +52,7 @@ export default {
       display: table;
       content: "";
   }
-  
+
   .clearfix:after {
       clear: both
   }

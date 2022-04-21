@@ -5,22 +5,22 @@
        <product-card :prdList="prdList"/>
    </div>
  </template>
- 
+
 <script>
 import ProductCard from '@/components/product/ProductCard.vue'
 
 const dummyData = [{
-    prdId : '1',
+    prdNo : '1',
     prdNm : '냉장고1',
     cateNo : '100100100',
 },
 {
-    prdId : '2',
+    prdNo : '2',
     prdNm : '냉장고2',
     cateNo : '100100100',
 },
 {
-    prdId : '3',
+    prdNo : '3',
     prdNm : '냉장고3',
     cateNo : '100100100',
 }
@@ -50,7 +50,7 @@ const dummyData = [{
   },
  }
  </script>
- 
+
  <style>
- 
+
  </style>
