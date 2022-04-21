@@ -1,7 +1,6 @@
 <template>
   <div>
-    <display-category/>
-    <product-list/>
+    <nuxt-child/>
   </div>
 </template>
 
@@ -19,8 +18,8 @@ export default {
     return {
       meta: [{
         hid: 'description',
-        name: '클릭된 카테고리!',
-        content: '카테고리!',
+        name: '상품전시페이지',
+        content: '상품전시페이지',
       }
       ]
     }
