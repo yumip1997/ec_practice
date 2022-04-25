@@ -1,13 +1,13 @@
  <template>
    <div>
-       카테고리 페이지..<br>
+
        카테고리 {{$route.query.label || '전체'}}의 상품 리스트 영역
        <product-card :prdList="prdList"/>
    </div>
  </template>
 
 <script>
-import ProductCard from '@/components/product/ProductCard.vue'
+import ProductCard from '~/components/product/ProductCard.vue'
 
 const dummyData = [{
     prdNo : '1',

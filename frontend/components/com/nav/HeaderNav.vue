@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import DisplayCategory from "./category/DisplayCategory";
+import DisplayCategory from "~/components/com/nav/category/DisplayCategory";
+
 export default {
   components: {DisplayCategory},
   data() {
@@ -29,7 +30,7 @@ export default {
       this.activeIndex = index;
     },
     getCurrentCate(e){
-      this.$router.push({name :'display-product-ProductList', query : {label : e.label, cateNo : e.cateNo}})
+      this.$router.push({name :'product', query : {label : e.label, cateNo : e.cateNo}})
     },
   }
 }
