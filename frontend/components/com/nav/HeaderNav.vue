@@ -30,7 +30,7 @@ export default {
       this.activeIndex = index;
     },
     getCurrentCate(e){
-      this.$router.push({name :'product', query : {label : e.label, cateNo : e.cateNo}})
+      this.$router.push({name :'product', query : {label : e.label, cateId : e.cateId}})
     },
   }
 }

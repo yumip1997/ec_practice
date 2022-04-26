@@ -1,6 +1,5 @@
  <template>
    <div>
-
        카테고리 {{$route.query.label || '전체'}}의 상품 리스트 영역
        <product-card :prdList="prdList"/>
    </div>
@@ -36,9 +35,9 @@ const dummyData = [{
    head() {
     return {
        meta: [{
-        hid: 'cateNo',
+        hid: 'cateId',
         name: `카테고리 번호`,
-        content: `${this.$route.query.cateNo}`,
+        content: `${this.$route.query.cateId}`,
       },
       {
         hid: 'cateNm',

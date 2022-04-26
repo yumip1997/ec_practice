@@ -6,7 +6,7 @@
       <img src="" class="image">
       <div style="padding: 14px;">
         <span>
-          <nuxt-link :to="{name : 'display-product-prdNo', query : {prdNo : prd.prdNo}}">
+          <nuxt-link :to="{name : 'product-prdNo', query : {prdNo : prd.prdNo}}">
             {{prd.prdNm}}
           </nuxt-link>
         </span>

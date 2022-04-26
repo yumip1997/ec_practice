@@ -1,27 +1,22 @@
+import axios from "axios";
+
 class AxiosClient {
   constructor(baseURL){
     this.baseURL = baseURL
-      // this.client = this.$axios.create({
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     "Access-Control-Allow-Origin": "*"
-      //   },
-      //   timeout : 5000
-      // })
   }
 
-  async post(data) {
+  async post(url, data) {
     try {
-      const response =  await this.$axios.post(this.baseURL, data);
+      const response =  await axios.post(url, data);
       return response;
     }catch(error) {
       throw error;
     }
   }
 
-  async get(params) {
+  async get(url, params) {
     try{
-      const response = await this.$axios.get(this.baseURL, {params: params});
+      const response = await axios.get(url, {params: params});
       return response;
     }catch(error){
       throw error;
