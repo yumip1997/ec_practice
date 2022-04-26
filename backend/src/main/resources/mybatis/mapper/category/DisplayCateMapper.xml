@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper
+3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himart.backend.category.dao.DispCateDao">
+    <select id="selectDispCateList" resultType="DispCateVO">
+        with recursive hierarchy_cate as (
+            select cate_id, cate_nm, cate_depth, parent_cate_id, cate_leaf_f, concat(cate_nm) as cate_path
+            from category
+            where parent_cate_id is null
+            union all
+            select c.cate_id, c.cate_nm, c.cate_depth, c.parent_cate_id, c.cate_leaf_f, concat(hc.cate_path, '>', c.cate_nm) as cate_path
+            from hierarchy_cate as hc
+            inner join category c
+            on hc.cate_id = c.parent_cate_id
+        )
+        select
+            hierarchy_cate.cate_id as cateId
+            , hierarchy_cate.cate_nm as cateNm
+            , hierarchy_cate.cate_depth as cateDepth
+            , hierarchy_cate.parent_cate_id as parentCateId
+            , hierarchy_cate.cate_leaf_f as cateLeafF
+            , hierarchy_cate.cate_path as catePath
+        from hierarchy_cate
+    </select>
+</mapper>

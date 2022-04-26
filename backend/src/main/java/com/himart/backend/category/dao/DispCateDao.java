@@ -8,6 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface DispCateDao {
-    @Select("select * from cate")
-    List<DispCateVO> getDispCateList();
+    List<DispCateVO> selectDispCateList();
 }
