@@ -100,8 +100,7 @@ public class HierarchyCategoryMaker {
     }
 
     public List<HierarchyDispCateDto> getHierarchyCate(){
-        return cateMap.entrySet().stream()
-                .map(Map.Entry::getValue)
+        return cateMap.values().stream()
                 .filter(this::isParent)
                 .collect(Collectors.toList());
     }
