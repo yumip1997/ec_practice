@@ -6,6 +6,7 @@
 
 <script>
 import CateApi from "~/api/CateApi";
+import axios from "axios";
 
 export default {
   name: "DisplayCategory",
@@ -15,17 +16,13 @@ export default {
       cateList : []
     }
   },
-
-  //TODO 라이프사이클 찾아보기
   async created(){
     await this.initCateList();
   },
-
   methods: {
     async initCateList(){
       this.cateList = await CateApi.getDispCateList();
     },
-
     handleNodeClick(node) {
       if (node.cateLeafF) {
         this.$emit('getCurrentCate', node);

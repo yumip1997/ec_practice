@@ -1,6 +1,6 @@
 <template>
 <div>
-  메인 페이지
+  <h1>메인 페이지</h1>
   <nuxt-child/>
 </div>
 </template>

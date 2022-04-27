@@ -3,7 +3,7 @@
   <el-row>
   <el-col :span="8" v-for="(prd, index) in prdList" :key="index">
     <el-card :body-style="{ padding: '0px' }">
-      <img src="" class="image">
+      <img src="https://dummyimage.com/600x400" class="image">
       <div style="padding: 14px;">
         <span>
           <nuxt-link :to="{name : 'product-prdNo', query : {prdNo : prd.prdNo}}">

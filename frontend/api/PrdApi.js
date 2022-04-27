@@ -5,6 +5,11 @@ class PrdApi {
     this.client = new AxiosClient('/api/prd')
   }
 
+  async getPrdListByCate(cateId){
+    const prdList = await this.client.get(this.client.baseURL + "/list", {cateId : cateId});
+    return prdList.data;
+  }
+
 }
 
 const instance = new PrdApi();
