@@ -5,12 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PrdDtlDto {
+public class PrdInfoDto {
 
     private int prdId;
     private String prdNm;
     private String brdNm;
     private int prdSlPrc;
     private int cateId;
-
 }
