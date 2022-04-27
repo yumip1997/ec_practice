@@ -2,8 +2,7 @@
 <div>
   <el-row>
   <el-col :span="8" v-for="(prd, index) in prdList" :key="index">
-    <el-card :body-style="{ padding: '0px' }">
-      <img src="https://dummyimage.com/600x400" class="image">
+    <el-card :body-style="{ padding: '2px' }">
       <div style="padding: 14px;">
         <span>
           <nuxt-link :to="{name : 'product-prdNo', query : {prdNo : prd.prdNo}}">
@@ -27,33 +26,4 @@ export default {
 </script>
 
 <style>
-  .time {
-    font-size: 13px;
-    color: #999;
-  }
-
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-  }
-
-  .button {
-    padding: 0;
-    float: right;
-  }
-
-  .image {
-    width: 100%;
-    display: block;
-  }
-
-  .clearfix:before,
-  .clearfix:after {
-      display: table;
-      content: "";
-  }
-
-  .clearfix:after {
-      clear: both
-  }
 </style>

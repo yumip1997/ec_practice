@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CateApi from "~/util/api/CateApi";
+import CateApi from "@/util/api/cate-api";
 
 export default {
   name: "DisplayCategory",

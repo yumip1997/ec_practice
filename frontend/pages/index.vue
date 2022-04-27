@@ -1,21 +1,17 @@
 <template>
-  <div>
-    <h1>메인 페이지</h1>
-    <nuxt-child/>
-  </div>
+<div>
+  <el-empty class="empty_body" description="메인 페이지 개발 중입니다."></el-empty>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
-  head() {
-    return {
-      meta: [{
-        hid: 'description',
-        name: '메인 페이지',
-        content: 'nuxt project',
-      }]
-    }
-  },
+  name: "index"
 }
 </script>
+
+<style scoped>
+.empty_body{
+  padding-top: 15%;
+}
+</style>

@@ -1,12 +1,10 @@
 <template>
-<div>
-  sample1 페이지
-</div>
+<div></div>
 </template>
 
 <script>
 export default {
-  name: "sample1"
+  name: "sample3"
 }
 </script>
 

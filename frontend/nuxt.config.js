@@ -1,6 +1,6 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  target : 'static',
+  target : 'server',
   head: {
     title: 'frontend',
     htmlAttrs: {
@@ -32,12 +32,13 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    ['@nuxtjs/dotenv', { filename: `.env.${process.env.NODE_ENV}` }],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -45,19 +46,18 @@ export default {
     transpile: [/^element-ui/],
   },
 
-  axios : {
+  axios :{
     proxy : true,
-    baseURL : "http://localhost:8080/",
-    browserBaseURL : "http://localhost:8080/api/"
-
   },
 
   proxy : {
     '/api' : {
-      target : "http://localhost:8080",
+      target : `${process.env.BASE_URL}`,
+      changeOrigin: true,
       pathRewrite: {
         '^/api' : ""
       },
     },
   }
+
 }

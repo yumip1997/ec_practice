@@ -15,7 +15,7 @@
         <nuxt-link to="/planshop" class="underline-none">기획전</nuxt-link>
       </el-menu-item>
       <el-menu-item index="5" class="right-side">
-        <nuxt-link to="/sample" class="underline-none">테스트</nuxt-link>
+        <nuxt-link to="/test" class="underline-none">테스트</nuxt-link>
       </el-menu-item>
     </el-menu>
   </div>
@@ -39,7 +39,9 @@ export default {
       this.activeIndex = index;
     },
     handleNodeClick(e){
-      this.$router.push({name :'product', query : {label : e.label, cateId : e.cateId}});
+      if(e.cateLeafF){
+        this.$router.push({name :'product', query : {label : e.label, cateId : e.cateId}});
+      }
     },
   }
 }
