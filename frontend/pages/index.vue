@@ -1,14 +1,14 @@
 <template>
-<div>
-  <h1>메인 페이지</h1>
-  <nuxt-child/>
-</div>
+  <div>
+    <h1>메인 페이지</h1>
+    <nuxt-child/>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'IndexPage',
-    head() {
+  head() {
     return {
       meta: [{
         hid: 'description',

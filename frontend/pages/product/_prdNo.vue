@@ -9,7 +9,6 @@
 export default {
   async asyncData({$axios}){
     const {data} = await $axios.get('/api/prd?prdId=4');
-    console.log(data);
   }
 }
 </script>

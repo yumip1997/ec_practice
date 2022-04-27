@@ -3,13 +3,19 @@
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <el-submenu index="1">
         <template slot="title">카테고리</template>
-        <display-category @getCurrentCate="getCurrentCate"/>
+        <el-tree :data="cateList" @node-click="handleNodeClick"></el-tree>
       </el-submenu>
       <el-menu-item index="2" class="right-side">
         <nuxt-link to="/" class="underline-none">홈으로</nuxt-link>
       </el-menu-item>
       <el-menu-item index="3" class="right-side">
         <nuxt-link to="/" class="underline-none">로그인</nuxt-link>
+      </el-menu-item>
+      <el-menu-item index="4" class="right-side">
+        <nuxt-link to="/planshop" class="underline-none">기획전</nuxt-link>
+      </el-menu-item>
+      <el-menu-item index="5" class="right-side">
+        <nuxt-link to="/sample" class="underline-none">테스트</nuxt-link>
       </el-menu-item>
     </el-menu>
   </div>
@@ -20,6 +26,9 @@ import DisplayCategory from "~/components/com/nav/category/DisplayCategory";
 
 export default {
   components: {DisplayCategory},
+  props :{
+    cateList : Array,
+  },
   data() {
     return {
       activeIndex: "1",
@@ -29,8 +38,8 @@ export default {
     handleSelect(index) {
       this.activeIndex = index;
     },
-    getCurrentCate(e){
-      this.$router.push({name :'product', query : {label : e.label, cateId : e.cateId}})
+    handleNodeClick(e){
+      this.$router.push({name :'product', query : {label : e.label, cateId : e.cateId}});
     },
   }
 }

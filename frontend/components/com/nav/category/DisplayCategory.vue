@@ -5,8 +5,7 @@
 </template>
 
 <script>
-import CateApi from "~/api/CateApi";
-import axios from "axios";
+import CateApi from "~/util/api/CateApi";
 
 export default {
   name: "DisplayCategory",
@@ -16,7 +15,7 @@ export default {
       cateList : []
     }
   },
-  async created(){
+  async fetch(){
     await this.initCateList();
   },
   methods: {

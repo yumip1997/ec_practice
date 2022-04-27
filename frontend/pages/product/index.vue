@@ -7,8 +7,8 @@
 
 <script>
 import ProductCard from '~/components/product/ProductCard.vue'
-import PrdApi from "~/api/PrdApi";
-import {getProductMetaInfo} from "../metaInfo/product-meta";
+import PrdApi from "~/util/api/PrdApi";
+import {getProductMetaInfo} from "~/util/metaInfo/product-meta";
 
 export default {
   components: {ProductCard},
@@ -22,12 +22,12 @@ export default {
       await this.initPrdListByCate();
     }
   },
-  async asyncData({route}){
-    console.log("실행?");
-    const prdList = await PrdApi.getPrdListByCate(route.query.cateId);
-    return{
-      prdList : prdList
-    }
+  async asyncData({$axios}){
+    const prdList = await $axios.$get('https://dummyjson.com/products');
+    console.log(prdList);
+  },
+  async created(){
+    await this.initPrdListByCate();
   },
   methods: {
     async initPrdListByCate() {
