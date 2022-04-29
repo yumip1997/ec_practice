@@ -1,7 +1,9 @@
 <template>
-<div>
-  sample2 페이지
-</div>
+  <div>
+    <el-container class="page_body">
+      sample2 페이지 컴퍼넌트
+    </el-container>
+  </div>
 </template>
 
 <script>

@@ -27,6 +27,8 @@ export default {
     '@/plugins/element-ui'
   ],
 
+  ssr : true,
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -48,6 +50,7 @@ export default {
 
   axios :{
     proxy : true,
+    baseURL : `${process.env.BASE_URL}`,
   },
 
   proxy : {

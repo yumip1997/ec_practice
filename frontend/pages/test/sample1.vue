@@ -1,7 +1,7 @@
 <template>
 <div>
   <el-container class="page_body">
-    sample1 페이지 컴퍼넌트 입니다
+    sample1 페이지 컴퍼넌트
   </el-container>
 </div>
 </template>

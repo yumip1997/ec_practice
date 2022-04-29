@@ -8,9 +8,6 @@
       <el-menu-item index="2" class="right-side">
         <nuxt-link to="/" class="underline-none">홈으로</nuxt-link>
       </el-menu-item>
-      <el-menu-item index="3" class="right-side">
-        <nuxt-link to="/" class="underline-none">로그인</nuxt-link>
-      </el-menu-item>
       <el-menu-item index="4" class="right-side">
         <nuxt-link to="/planshop" class="underline-none">기획전</nuxt-link>
       </el-menu-item>

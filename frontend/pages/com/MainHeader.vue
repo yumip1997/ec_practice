@@ -6,13 +6,16 @@
 
 <script>
 import HeaderNav from '~/components/com/nav/HeaderNav.vue';
-import CateApi from "@/util/api/cate-api";
+import CateApi from "~/util/api/cate-api";
 
 export default {
   components: {HeaderNav},
 
-  async created() {
-    this.cateList = await CateApi.getDispCateList();
+  async fetch(){
+    console.log("사버일까?" + `${process.server}`);
+    console.log("브라우저일까?" + `${process.browser}`);
+    const cateList = await CateApi.getDispCateList();
+    this.cateList = cateList;
   },
 
   data() {
