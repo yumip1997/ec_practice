@@ -5,7 +5,7 @@
     <el-card :body-style="{ padding: '2px' }">
       <div style="padding: 14px;">
         <span>
-          <nuxt-link :to="{name : 'product-prdNo', query : {prdNo : prd.prdNo}}">
+          <nuxt-link :to="{name : 'product-prdId', params : {prdId : prd.prdId}}">
             {{prd.prdNm}}
           </nuxt-link>
         </span>

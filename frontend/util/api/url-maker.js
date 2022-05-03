@@ -1,8 +1,8 @@
-const convertURL = (url) =>  isBrowserCall() ? addProxyURL(url) : url
+const convertURL = (url) =>  getBaseURL() + url
+
+const getBaseURL = () => isBrowserCall() ? `${process.env.BROWSER_BASE_URL}` : `${process.env.BASE_URL}`
 
 const isBrowserCall = () => `${process.browser}` === "true"
-
-const addProxyURL = (url) => "/api" + url
 
 export {
   convertURL

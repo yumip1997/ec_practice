@@ -1,4 +1,4 @@
-import CustomApi from "./custom-api";
+import CustomApi from "../custom-api";
 
 const baseURL = "/cate"
 

@@ -6,11 +6,11 @@
         <el-tree :data="cateList" @node-click="handleNodeClick"></el-tree>
       </el-submenu>
       <el-menu-item index="2" class="right-side">
-        <nuxt-link to="/" class="underline-none">홈으로</nuxt-link>
+        <nuxt-link to="/" class="underline-none" :prefetch="false">홈으로</nuxt-link>
       </el-menu-item>
-      <el-menu-item index="4" class="right-side">
-        <nuxt-link to="/planshop" class="underline-none">기획전</nuxt-link>
-      </el-menu-item>
+<!--      <el-menu-item index="4" class="right-side">-->
+<!--        <nuxt-link to="/planshop" class="underline-none">기획전</nuxt-link>-->
+<!--      </el-menu-item>-->
       <el-menu-item index="5" class="right-side">
         <nuxt-link to="/test" class="underline-none">테스트</nuxt-link>
       </el-menu-item>

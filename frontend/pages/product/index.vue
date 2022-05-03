@@ -6,13 +6,12 @@
         <product-card class="page_body_content" :prdList="prdList"/>
       </el-col>
     </el-row>
-
   </div>
 </template>
 
 <script>
 import ProductCard from '~/components/product/ProductCard.vue'
-import ProductApi from '~/util/api/product-api'
+import ProductApi from '~/util/api/product/product-api'
 import {getProductMetaInfo} from "~/util/metaInfo/product-meta";
 
 export default {
@@ -22,22 +21,12 @@ export default {
       prdList: [],
     }
   },
-  watch: {
-    async '$route.query'() {
-      await this.initPrdListByCate();
-    }
-  },
-  async created() {
-    await this.initPrdListByCate();
-  },
-  methods: {
-    async initPrdListByCate() {
-      const cateId = this.$route.query.cateId;
-      this.prdList = await this.getPrdListByCate(cateId);
-    },
-    async getPrdListByCate(cateId) {
-      const prdList = await ProductApi.getPrdListByCate(cateId);
-      return prdList;
+  watchQuery: true,
+  async asyncData({route}) {
+    const cateId = route.query.cateId;
+    const prdList = await ProductApi.getPrdListByCate(cateId);
+    return {
+      prdList,
     }
   },
   head() {
