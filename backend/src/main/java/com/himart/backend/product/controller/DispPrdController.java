@@ -24,7 +24,7 @@ public class DispPrdController {
         return dispPrdService.getPrdListByCate(cateId);
     }
 
-    @GetMapping("/prd")
+    @GetMapping
     PrdDtlDto getPrdDtl(@RequestParam("prdId")int prdId){
         PrdDtlDto prdDtlDto = dispPrdService.getPrdDtl(prdId);
         return prdDtlDto;

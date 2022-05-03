@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface DispPrdDao {
 
-    PrdDtlDto getPrdDtl(int prdId);
+    PrdDtlDto selectPrdDtl(int prdId);
 
     List<PrdInfoDto> selectPrdListByCate(int cateId);
 }

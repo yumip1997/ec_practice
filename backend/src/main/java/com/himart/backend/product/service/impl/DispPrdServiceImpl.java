@@ -17,7 +17,7 @@ public class DispPrdServiceImpl implements DispPrdService {
 
     @Override
     public PrdDtlDto getPrdDtl(int prdId) {
-        return dispPrdDao.getPrdDtl(prdId);
+        return dispPrdDao.selectPrdDtl(prdId);
     }
 
     @Override

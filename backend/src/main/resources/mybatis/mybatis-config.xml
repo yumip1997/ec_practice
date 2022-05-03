@@ -6,5 +6,6 @@
         <package name="com.himart.backend.category.vo"/>
         <package name="com.himart.backend.category.dto"/>
         <package name="com.himart.backend.product.dto"/>
+        <package name="com.himart.backend.product.vo"/>
     </typeAliases>
 </configuration>
