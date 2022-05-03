@@ -7,8 +7,19 @@
 </template>
 
 <script>
+import CateApi from "../../util/api/category/cate-api";
+
 export default {
-  name: "sample3"
+  name: "sample3",
+  async fetch(){
+    const cateList = await CateApi.getDispCateList();
+    this.cateList = cateList;
+  },
+  data(){
+    return{
+      cateList : [],
+    }
+  }
 }
 </script>
 

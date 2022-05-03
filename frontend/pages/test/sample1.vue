@@ -12,16 +12,6 @@ import ProductApi from "../../util/api/product/product-api";
 
 export default {
   name: "sample1",
-  async fetch(){
-    const cateId = this.$route.query.cateId;
-    const prdList = await ProductApi.getPrdListByCate(cateId);
-    this.prdList = prdList;
-  },
-  data(){
-    return {
-      prdList : [],
-    }
-  }
 }
 </script>
 
