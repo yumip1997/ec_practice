@@ -2,17 +2,30 @@
 <div>
   <el-container class="page_body">
     sample1 페이지 컴퍼넌트
-    {{prdList}}
   </el-container>
 </div>
 </template>
 
 <script>
-import ProductApi from "../../util/api/product/product-api";
-
+const whoCall = () => {
+  return `${process.browser}` === 'true' ?  '브라우저' : '서버';
+}
 export default {
   name: "sample1",
-}
+  asyncData(){
+    console.log("asyncData  Hook" + whoCall());
+  },
+  fetch(){
+    console.log("fetch hook " + whoCall());
+  },
+  created(){
+    console.log("created hook " + whoCall());
+  },
+  mounted() {
+    console.log("mounted hook " + whoCall());
+  },
+};
+
 </script>
 
 <style scoped>

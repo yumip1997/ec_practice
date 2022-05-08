@@ -11,7 +11,7 @@ import CateApi from "../../util/api/category/cate-api";
 
 export default {
   name: "sample3",
-  async fetch(){
+  async created (){
     const cateList = await CateApi.getDispCateList();
     this.cateList = cateList;
   },

@@ -65,6 +65,7 @@ export default {
 <style scoped>
 
 .underline-none {
+  border-color: black;
   color: black;
 }
 .underline-none > :visited {

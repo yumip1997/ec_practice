@@ -1,6 +1,7 @@
 <template>
   <div>
     상세페이지~
+    {{prd}}
   </div>
 </template>
 
