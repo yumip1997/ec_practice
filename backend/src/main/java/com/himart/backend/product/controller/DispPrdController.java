@@ -1,8 +1,8 @@
 package com.himart.backend.product.controller;
 
 
-import com.himart.backend.product.dto.PrdDtlDto;
 import com.himart.backend.product.dto.PrdInfoDto;
+import com.himart.backend.product.dto.PrdDtlDto;
 import com.himart.backend.product.service.DispPrdService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
