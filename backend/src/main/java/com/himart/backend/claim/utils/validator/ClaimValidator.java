@@ -4,10 +4,17 @@ import com.himart.backend.claim.dto.ClaimDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface ClaimValidator {
+public class ClaimValidator {
 
-    boolean isValid(ClaimDto claimDto);
+    public boolean isValid(ClaimDto claimDto){
+        if(!isStatusValid(claimDto)){
+            return false;
+        }
+        return true;
+    }
 
-    boolean isValidStatus(ClaimDto claimDto);
-
+    public boolean isStatusValid(ClaimDto claimDto){
+        ClaimValidBase.valueOf(claimDto.getClaimType()).isValidStatus(claimDto);
+        return true;
+    }
 }

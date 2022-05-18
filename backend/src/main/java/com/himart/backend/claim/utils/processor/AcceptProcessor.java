@@ -1,54 +1,57 @@
 package com.himart.backend.claim.utils.processor;
 
 import com.himart.backend.claim.dto.ClaimDto;
+import com.himart.backend.claim.model.ClaimBase;
+import com.himart.backend.claim.utils.creator.ClaimDataCreator;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
-import org.springframework.transaction.annotation.Propagation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
+@RequiredArgsConstructor
+public class AcceptProcessor implements ClaimProcessor {
 
-public class AcceptProcessor extends ClaimProcessor {
+    private final ClaimValidator claimValidator;
+    private final ClaimDataCreator claimDataCreator;
+    private final ClaimDataManipulator claimDataManipulator;
 
-    public AcceptProcessor(ClaimValidator claimValidator, ClaimDataManipulator claimDataManipulator) {
-        super(claimValidator, claimDataManipulator);
+    public static AcceptProcessor getInstance(ClaimValidator claimValidator, ClaimDataCreator claimDataCreator, ClaimDataManipulator claimDataManipulator){
+        return new AcceptProcessor(claimValidator, claimDataCreator, claimDataManipulator);
     }
 
-    public static AcceptProcessor getAcceptProcessor(ClaimValidator claimValidator, ClaimDataManipulator claimDataManipulator){
-        return new AcceptProcessor(claimValidator, claimDataManipulator);
+
+    @Override
+    public void doValidationProcess(ClaimDto claimDto) {
+        claimValidator.isValid(claimDto);
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    void doValidationProcess(ClaimDto claimDto) {
-        this.claimValidator.isValid(claimDto);
+    public void doInsertMonitoringLog(ClaimDto claimDto) {
+        ClaimBase claimBase = claimDataCreator.getInsertClaimData(claimDto);
+        //JSON 형태로 변환
+        claimDataManipulator.insertClaimData(claimBase);
+
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    void doInsertMonitoringLog(ClaimDto claimDto) {
-        this.claimDataManipulator.insertOrderLog(claimDto);
+    public void doClaimDataManipulationProcess(ClaimDto claimDto) {
+        ClaimBase claimBase = claimDataCreator.getInsertClaimData(claimDto);
+        claimDataManipulator.insertClaimData(claimBase);
+        //... 실행
+
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    void doClaimDataManipulationProcess(ClaimDto claimDto) {
-        this.claimDataManipulator.insertClaimData(claimDto);
+    public void doUpdateMonitoringLog(ClaimDto claimDto) {
+
     }
 
-    @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    void doUpdateMonitoringLog(ClaimDto claimDto) {
-        this.claimDataManipulator.updateClaimData(claimDto);
-    }
-
-    @Override
     @Transactional
+    @Override
     public void doProcess(ClaimDto claimDto) {
         doValidationProcess(claimDto);
-        //모니터링 : insert, updata json 형식 , 반환값은 key값
         doInsertMonitoringLog(claimDto);
         doClaimDataManipulationProcess(claimDto);
-        //모니터링 : insert, updata json 형식 , 반환값은 key값
         doUpdateMonitoringLog(claimDto);
     }
 }

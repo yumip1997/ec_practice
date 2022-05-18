@@ -1,43 +1,41 @@
 package com.himart.backend.claim.utils.processor;
 
 import com.himart.backend.claim.dto.ClaimDto;
+import com.himart.backend.claim.utils.creator.ClaimDataCreator;
 import com.himart.backend.claim.utils.helper.IFCallHelper;
-import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-public class CompleteProcessor extends ClaimProcessor {
+@RequiredArgsConstructor
+public class CompleteProcessor implements ClaimProcessor {
 
-    public CompleteProcessor(ClaimValidator claimValidator, ClaimDataManipulator claimDataManipulator) {
-        super(claimValidator, claimDataManipulator);
+    private final ClaimValidator claimValidator;
+    private final ClaimDataCreator claimDataCreator;
+
+    public static CompleteProcessor getInstance(ClaimValidator claimValidator, ClaimDataCreator claimDataCreator) {
+        return new CompleteProcessor(claimValidator, claimDataCreator);
     }
 
     @Override
-    void doValidationProcess(ClaimDto claimDto) {
-
-    }
-
-    @Override
-    void doInsertMonitoringLog(ClaimDto claimDto) {
-
-    }
-
-    @Override
-    void doClaimDataManipulationProcess(ClaimDto claimDto) {
+    public void doValidationProcess(ClaimDto claimDto) {
 
     }
 
     @Override
-    void doUpdateMonitoringLog(ClaimDto claimDto) {
+    public void doInsertMonitoringLog(ClaimDto claimDto) {
 
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    void doIFCallProcess(ClaimDto claimDto) {
-        IFCallHelper.callPaymentHelper();
-        IFCallHelper.callCouponRestorHelper();
+    public void doClaimDataManipulationProcess(ClaimDto claimDto) {
+
+    }
+
+    @Override
+    public void doUpdateMonitoringLog(ClaimDto claimDto) {
+
     }
 
     @Override
