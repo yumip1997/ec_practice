@@ -1,24 +1,23 @@
 package com.himart.backend.claim.utils.factory;
 
-import com.himart.backend.claim.dto.ClaimDto;
 import com.himart.backend.claim.utils.core.Claim;
 import com.himart.backend.claim.utils.core.Exchange;
-import com.himart.backend.claim.utils.creator.impl.ExchangeAcceptDataCreator;
-import com.himart.backend.claim.utils.processor.impl.ExchangeAcceptProcessor;
+import com.himart.backend.claim.utils.manipulator.impl.ExchangeAcceptDataManipulator;
+import com.himart.backend.claim.utils.processor.AcceptProcessor;
+import com.himart.backend.claim.utils.processor.CompleteProcessor;
 import com.himart.backend.claim.utils.validator.impl.ExchangeAcceptValidator;
 
 public enum ClaimType {
 
     //교환접수
-    //TODO new 연산자가 필요할까?
     EA("EA"){
         @Override
         Claim create() {
-            return new Exchange(new ExchangeAcceptProcessor(new ExchangeAcceptValidator(), new ExchangeAcceptDataCreator()));
+            return Exchange.getExchange(ClaimProcessorFactory.EA.getClaimProcessor());
         }
     };
-    
     //교환완료
+
     //교환철회
     
     //반품접수
@@ -32,5 +31,4 @@ public enum ClaimType {
     }
 
     abstract Claim create();
-
 }

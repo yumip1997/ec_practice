@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class ClaimController{
+public class ClaimController {
 
     private final ClaimService claimService;
 
     @PostMapping("/claim")
-    public void claim(@RequestBody ClaimDto claimDto){
-       claimService.claim(claimDto);
+    public void claim(@RequestBody ClaimDto claimDto) {
+        claimService.claim(claimDto);
     }
 }
