@@ -1,20 +1,13 @@
 <template>
 <div>
-  <main-header/>
+  <Nuxt name="MainHeader"/>
   <Nuxt/>
-  <main-footer class="main_footer"/>
+  <Nuxt name="MainFooter" class="main_footer"/>
 </div>
 </template>
 
 <script>
-import MainHeader from "~/pages/com/MainHeader.vue"
-import MainFooter from "~/pages/com/MainFooter";
-
 export default {
-  components :{
-    MainFooter,
-    MainHeader,
-  },
   name: "defaultLayout"
 }
 </script>

@@ -3,26 +3,28 @@
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <el-submenu index="1">
         <template slot="title">카테고리</template>
-        <el-tree :data="cateList" @node-click="handleNodeClick"></el-tree>
+        <tree-nav
+          :tree-list="cateList"
+          @click-node="handleNodeClick"
+        />
       </el-submenu>
       <el-menu-item index="2" class="right-side">
-        <nuxt-link to="/" class="underline-none" :prefetch="false">홈으로</nuxt-link>
+        <nuxt-link to="/" class="underline-none">홈으로</nuxt-link>
       </el-menu-item>
-<!--      <el-menu-item index="4" class="right-side">-->
-<!--        <nuxt-link to="/planshop" class="underline-none">기획전</nuxt-link>-->
-<!--      </el-menu-item>-->
       <el-menu-item index="5" class="right-side">
-        <nuxt-link to="/test" class="underline-none">테스트</nuxt-link>
+        <nuxt-link to="/product" class="underline-none">상품페이지</nuxt-link>
       </el-menu-item>
     </el-menu>
   </div>
 </template>
 
+
+
 <script>
-import DisplayCategory from "~/components/com/nav/category/DisplayCategory";
+import TreeNav from "./TreeNav";
 
 export default {
-  components: {DisplayCategory},
+  components: {TreeNav},
   props :{
     cateList : Array,
   },

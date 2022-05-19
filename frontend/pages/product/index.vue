@@ -1,50 +1,25 @@
 <template>
-  <div>
-    <h4 class="page_title">카테고리 {{ $route.query.label || '전체' }}의 상품 리스트 영역</h4>
-    <el-row :gutter="20">
-      <el-col :span="12" :offset="6">
-        <product-card class="page_body_content" :prdList="prdList"/>
-      </el-col>
-    </el-row>
-  </div>
+<div>
+  상품리스트..
+</div>
 </template>
 
 <script>
-import ProductCard from '~/components/product/ProductCard.vue'
-import ProductApi from '~/util/api/product/product-api'
-import {getProductMetaInfo} from "~/util/metaInfo/product-meta";
-
 export default {
-  components: {ProductCard},
-  data() {
-    return {
-      prdList: [],
-    }
+  name: "index",
+
+  asyncData(){
+    console.log(`${process.server}` ===  'true' ? "server" : "client");
+    console.log("product asyncData");
   },
-  watchQuery: true,
-  async asyncData({route}) {
-    const cateId = route.query.cateId;
-    const prdList = await ProductApi.getPrdListByCate(cateId);
-    return {
-      prdList,
-    }
-  },
-  head() {
-    return {
-      meta: getProductMetaInfo(this)
-    }
+
+  async fetch(){
+    console.log(`${process.server}` ===  'true' ? "server" : "client");
+    console.log("proudct fetch");
   },
 }
 </script>
 
-<style>
-.page_body_content {
-  text-align: center;
-}
+<style scoped>
 
-.page_title {
-  padding-top: 20px;
-  text-align: center;
-  color: gray;
-}
 </style>

@@ -12,18 +12,17 @@ export default {
   components: {HeaderNav},
 
   async asyncData(){
-    console.log("asnycData called");
     const cateList = await CateApi.getDispCateList();
-    return{
+    return {
       cateList,
     }
   },
 
-  data() {
+  data(){
     return {
-      cateList: [],
+      cateList : [],
     }
-  },
+  }
 }
 </script>
 

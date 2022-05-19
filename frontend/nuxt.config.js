@@ -61,6 +61,23 @@ export default {
         '^/api' : ""
       },
     },
-  }
+  },
 
+  router : {
+    extendRoutes (routes, resolve) {
+      const rootIndex = routes.findIndex(route => route.name === "index");
+      routes[rootIndex] = {
+        ...routes[rootIndex],
+        components : {
+          default : routes[rootIndex].component,
+          MainHeader : resolve(__dirname, 'pages/main-header'),
+          MainFooter : resolve(__dirname, 'pages/main-footer'),
+        },
+        chunkNames : {
+          MainHeader : 'pages/main-header',
+          MainFooter : 'pages/main-footer'
+        }
+      }
+    }
+  }
 }

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-empty class="empty_body" description="메인 페이지 개발 중입니다."></el-empty>
+  <el-empty class="empty_body" description="메인 페이지 개발 중입니다." />
 </div>
 </template>
 
