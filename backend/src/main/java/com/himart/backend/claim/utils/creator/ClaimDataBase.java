@@ -5,7 +5,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ClaimDataBase {
 
-    EA("E", "D", "EA");
+    EA("E", "D", "EA"),
+    EC("E", "R", "EC");
 
     private final String claimCode;
     private final String deliveryCode;

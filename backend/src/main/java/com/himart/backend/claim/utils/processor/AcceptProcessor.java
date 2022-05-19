@@ -15,7 +15,9 @@ public class AcceptProcessor implements ClaimProcessor {
     private final ClaimDataCreator claimDataCreator;
     private final ClaimDataManipulator claimDataManipulator;
 
-    public static AcceptProcessor getInstance(ClaimValidator claimValidator, ClaimDataCreator claimDataCreator, ClaimDataManipulator claimDataManipulator){
+    public static AcceptProcessor getInstance(ClaimValidator claimValidator,
+                                              ClaimDataCreator claimDataCreator,
+                                              ClaimDataManipulator claimDataManipulator){
         return new AcceptProcessor(claimValidator, claimDataCreator, claimDataManipulator);
     }
 
@@ -29,7 +31,7 @@ public class AcceptProcessor implements ClaimProcessor {
     public void doInsertMonitoringLog(ClaimDto claimDto) {
         ClaimBase claimBase = claimDataCreator.getInsertClaimData(claimDto);
         //JSON 형태로 변환
-        claimDataManipulator.insertClaimData(claimBase);
+        claimDataManipulator.insertOrderLog(claimBase);
 
     }
 
@@ -37,7 +39,7 @@ public class AcceptProcessor implements ClaimProcessor {
     public void doClaimDataManipulationProcess(ClaimDto claimDto) {
         ClaimBase claimBase = claimDataCreator.getInsertClaimData(claimDto);
         claimDataManipulator.insertClaimData(claimBase);
-        //... 실행
+        //주문비용, 주문혜택 등에 insert 또는 update시킬 데이터를 ClaimDataCreator를 통해 가져온 후 실행시킨다
 
     }
 

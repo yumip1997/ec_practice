@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ClaimBase {
-
+    
     private String claimCode;
     private String deliveryCode;
     private String orderStateCode;

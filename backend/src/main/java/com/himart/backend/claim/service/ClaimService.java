@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ClaimService {
-
     public void claim(ClaimDto claimDto){
-        Claim claim =   ClaimFactory.create(claimDto.getClaimType());
+        Claim claim = ClaimFactory.create(claimDto.getClaimType());
         claim.execute(claimDto);
     }
 
