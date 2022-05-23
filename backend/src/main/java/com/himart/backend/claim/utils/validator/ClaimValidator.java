@@ -6,9 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class ClaimValidator {
 
-    //TODO ClaimDao 주입 방법 생각해보기!
+    private final ClaimDao claimDao;
 
     public boolean isValid(ClaimDto claimDto){
         if(!isStatusValid(claimDto)){

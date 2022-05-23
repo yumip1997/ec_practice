@@ -6,21 +6,29 @@ import com.himart.backend.claim.utils.creator.ClaimDataCreator;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@RequiredArgsConstructor
-public class AcceptProcessor implements ClaimProcessor {
+import javax.annotation.PostConstruct;
 
+@RequiredArgsConstructor
+@Component
+public class AcceptProcessor implements ClaimProcessor {
+    private static AcceptProcessor acceptProcessor;
     private final ClaimValidator claimValidator;
     private final ClaimDataCreator claimDataCreator;
     private final ClaimDataManipulator claimDataManipulator;
 
-    public static AcceptProcessor getInstance(ClaimValidator claimValidator,
-                                              ClaimDataCreator claimDataCreator,
-                                              ClaimDataManipulator claimDataManipulator){
-        return new AcceptProcessor(claimValidator, claimDataCreator, claimDataManipulator);
+    //의존성 주입이 완료된 후 실행
+    @PostConstruct
+    public void initialize(){
+        if(acceptProcessor != null) return;
+        acceptProcessor = this;
     }
 
+    public static AcceptProcessor getInstance(){
+        return acceptProcessor;
+    }
 
     @Override
     public void doValidationProcess(ClaimDto claimDto) {

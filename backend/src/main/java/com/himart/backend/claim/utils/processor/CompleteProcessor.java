@@ -7,22 +7,31 @@ import com.himart.backend.claim.utils.helper.IFCallHelper;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
+
 @RequiredArgsConstructor
+@Component
 public class CompleteProcessor implements ClaimProcessor {
 
+    private static CompleteProcessor completeProcessor;
     private final ClaimValidator claimValidator;
     private final ClaimDataCreator claimDataCreator;
     private final ClaimDataManipulator claimDataManipulator;
     private final IFCallHelper ifCallHelper;
 
-    public static CompleteProcessor getInstance(ClaimValidator claimValidator,
-                                                ClaimDataCreator claimDataCreator,
-                                                ClaimDataManipulator claimDataManipulator,
-                                                IFCallHelper ifCallHelper) {
-        return new CompleteProcessor(claimValidator, claimDataCreator, claimDataManipulator, ifCallHelper);
+    @PostConstruct
+    public void initialize(){
+        if(completeProcessor != null) return;
+        completeProcessor = this;
     }
+
+    public static CompleteProcessor getInstance(){
+        return completeProcessor;
+    }
+
     @Override
     public void doValidationProcess(ClaimDto claimDto) {
         claimValidator.isValid(claimDto);

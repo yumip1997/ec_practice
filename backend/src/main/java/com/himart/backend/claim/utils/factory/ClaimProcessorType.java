@@ -9,7 +9,10 @@ import com.himart.backend.claim.utils.processor.ClaimProcessor;
 import com.himart.backend.claim.utils.processor.CompleteProcessor;
 import com.himart.backend.claim.utils.processor.WithdrawalProcessor;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.function.Supplier;
 
@@ -17,15 +20,16 @@ import java.util.function.Supplier;
 public enum ClaimProcessorType {
 
     //접수
-    AC(() -> (AcceptProcessor.getInstance(new ClaimValidator(), new ClaimDataCreator(), new ClaimDataManipulator()))),
+    AC(() -> (AcceptProcessor.getInstance())),
     //완료
-    CP(() -> (CompleteProcessor.getInstance(new ClaimValidator(), new ClaimDataCreator(), new ClaimDataManipulator(), new IFCallHelper()))),
+    CP(() -> (CompleteProcessor.getInstance())),
     //철회
-    WD(() -> (WithdrawalProcessor.getInstance(new ClaimValidator(), new ClaimDataCreator())));
+    WD(() -> (WithdrawalProcessor.getInstance()));
 
     private final Supplier<ClaimProcessor> supplier;
 
     public ClaimProcessor getClaimProcessor(){
         return supplier.get();
     }
+
 }
