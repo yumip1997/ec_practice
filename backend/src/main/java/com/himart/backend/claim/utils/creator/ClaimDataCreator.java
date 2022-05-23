@@ -24,4 +24,16 @@ public class ClaimDataCreator {
 
     }
 
+    public ClaimBase getUpdateClaimData(ClaimDto claimDto){
+
+        ClaimDataBase claimDataBase = ClaimDataBase.valueOf(claimDto.getClaimType().name());
+
+        return ClaimBase.builder()
+                .claimCode(claimDataBase.getClaimCode())
+                .deliveryCode(claimDataBase.getDeliveryCode())
+                .orderStateCode(claimDataBase.getOrderStateCode())
+                .build();
+
+    }
+
 }

@@ -11,15 +11,14 @@ public class ClaimValidator {
 
     private final ClaimDao claimDao;
 
-    public boolean isValid(ClaimDto claimDto){
-        if(!isStatusValid(claimDto)){
-            return false;
-        }
-        return true;
+    public void isValid(ClaimDto claimDto){
+        this.isStatusValid(claimDto);
     }
 
-    public boolean isStatusValid(ClaimDto claimDto){
-        ClaimValidBase.valueOf(claimDto.getClaimType().name()).isValidStatus(claimDto);
-        return true;
+    public void isStatusValid(ClaimDto claimDto){
+        boolean valid = ClaimValidBase.valueOf(claimDto.getClaimType().name()).isValidStatus(claimDto);
+        if(!valid){
+            throw new RuntimeException("클레임 가능 상태가 아닙니다!");
+        }
     }
 }

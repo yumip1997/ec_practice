@@ -6,23 +6,25 @@ import com.himart.backend.claim.utils.creator.ClaimDataCreator;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-
-@RequiredArgsConstructor
 @Component
-public class AcceptProcessor implements ClaimProcessor {
-    private static AcceptProcessor acceptProcessor;
-    private final ClaimValidator claimValidator;
-    private final ClaimDataCreator claimDataCreator;
-    private final ClaimDataManipulator claimDataManipulator;
+@Log4j2
+public class AcceptProcessor extends ClaimProcessor {
 
-    //의존성 주입이 완료된 후 실행
+    private static AcceptProcessor acceptProcessor;
+    public AcceptProcessor(ClaimValidator claimValidator, ClaimDataCreator claimDataCreator, ClaimDataManipulator claimDataManipulator) {
+        //부모 생성자 호출
+        //bean으로 등록되어 있는 각 인스턴스들이 주입된다.
+        super(claimValidator, claimDataCreator, claimDataManipulator);
+    }
+
     @PostConstruct
     public void initialize(){
-        if(acceptProcessor != null) return;
+        //의존성 주입까지 완료된 후 실행됨(부모 클래스의 필드들에 의존성 주입이 완료되어있는 시점임)
         acceptProcessor = this;
     }
 
@@ -36,32 +38,21 @@ public class AcceptProcessor implements ClaimProcessor {
     }
 
     @Override
-    public void doInsertMonitoringLog(ClaimDto claimDto) {
-        ClaimBase claimBase = claimDataCreator.getInsertClaimData(claimDto);
-        //JSON 형태로 변환
-        claimDataManipulator.insertOrderLog(claimBase);
-
-    }
-
-    @Override
     public void doClaimDataManipulationProcess(ClaimDto claimDto) {
         ClaimBase claimBase = claimDataCreator.getInsertClaimData(claimDto);
         claimDataManipulator.insertClaimData(claimBase);
-        //주문비용, 주문혜택 등에 insert 또는 update시킬 데이터를 ClaimDataCreator를 통해 가져온 후 실행시킨다
-
-    }
-
-    @Override
-    public void doUpdateMonitoringLog(ClaimDto claimDto) {
-
     }
 
     @Transactional
     @Override
     public void doProcess(ClaimDto claimDto) {
-        doValidationProcess(claimDto);
-        doInsertMonitoringLog(claimDto);
-        doClaimDataManipulationProcess(claimDto);
-        doUpdateMonitoringLog(claimDto);
+        try{
+            doValidationProcess(claimDto);
+            doInsertMonitoringLog(claimDto);
+            doClaimDataManipulationProcess(claimDto);
+            doUpdateMonitoringLog(claimDto);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
     }
 }

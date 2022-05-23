@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ClaimDataManipulator {
 
-    //TODO Transaction 전파 되는지 확인해보기!
     private final ClaimDao claimDao;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
