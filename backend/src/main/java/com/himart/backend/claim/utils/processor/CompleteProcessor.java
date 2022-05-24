@@ -7,26 +7,34 @@ import com.himart.backend.claim.utils.helper.IFCallHelper;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 
+@Component
+@Log4j2
 public class CompleteProcessor extends ClaimProcessor {
 
     private static CompleteProcessor completeProcessor;
     private final IFCallHelper ifCallHelper;
 
-    public CompleteProcessor(ClaimValidator claimValidator, ClaimDataCreator claimDataCreator, ClaimDataManipulator claimDataManipulator, IFCallHelper ifCallHelper) {
+    //TODO 생성자 매개변수 리팩토링해보기
+    public CompleteProcessor(ClaimValidator claimValidator,
+                             ClaimDataCreator claimDataCreator,
+                             ClaimDataManipulator claimDataManipulator,
+                             IFCallHelper ifCallHelper) {
         super(claimValidator, claimDataCreator, claimDataManipulator);
         this.ifCallHelper = ifCallHelper;
     }
 
     @PostConstruct
-    public void initialize(){
+    public void initialize() {
         completeProcessor = this;
     }
 
-    public static CompleteProcessor getInstance(){
+    public static CompleteProcessor getInstance() {
         return completeProcessor;
     }
 
@@ -41,18 +49,21 @@ public class CompleteProcessor extends ClaimProcessor {
         claimDataManipulator.insertClaimData(claimBase);
     }
 
-    public void doIFCallProcess(ClaimDto claimDto){
-        ifCallHelper.callCouponRestorHelper();
+    public void doIFCallProcess(ClaimDto claimDto) {
         ifCallHelper.callCouponRestorHelper();
     }
 
     @Transactional
     @Override
     public void doProcess(ClaimDto claimDto) {
-        doValidationProcess(claimDto);
-        doInsertMonitoringLog(claimDto);
-        doClaimDataManipulationProcess(claimDto);
-        doIFCallProcess(claimDto);
-        doUpdateMonitoringLog(claimDto);
+        try{
+            doValidationProcess(claimDto);
+            doInsertMonitoringLog(claimDto);
+            doClaimDataManipulationProcess(claimDto);
+            doIFCallProcess(claimDto);
+            doUpdateMonitoringLog(claimDto);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
     }
 }

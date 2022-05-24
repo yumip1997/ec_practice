@@ -6,6 +6,7 @@ import com.himart.backend.claim.utils.creator.ClaimDataCreator;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 abstract public class ClaimProcessor {
