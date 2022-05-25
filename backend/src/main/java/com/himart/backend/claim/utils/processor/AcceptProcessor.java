@@ -17,15 +17,19 @@ public class AcceptProcessor extends ClaimProcessor {
 
     private static AcceptProcessor acceptProcessor;
 
-    public AcceptProcessor(ClaimValidator claimValidator, ClaimDataCreator claimDataCreator, ClaimDataManipulator claimDataManipulator) {
+    //TODO 생성자 매개변수 리팩토링해보기
+    public AcceptProcessor(ClaimValidator claimValidator,
+                           ClaimDataCreator claimDataCreator,
+                           ClaimDataManipulator claimDataManipulator) {
         super(claimValidator, claimDataCreator, claimDataManipulator);
     }
 
     @PostConstruct
-    public void initialize() {
+    private void initialize() {
         acceptProcessor = this;
     }
 
+    //TODO 시점 문제
     public static AcceptProcessor getInstance() {
         return acceptProcessor;
     }

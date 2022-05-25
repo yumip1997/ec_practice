@@ -20,7 +20,6 @@ public class CompleteProcessor extends ClaimProcessor {
     private static CompleteProcessor completeProcessor;
     private final IFCallHelper ifCallHelper;
 
-    //TODO 생성자 매개변수 리팩토링해보기
     public CompleteProcessor(ClaimValidator claimValidator,
                              ClaimDataCreator claimDataCreator,
                              ClaimDataManipulator claimDataManipulator,
