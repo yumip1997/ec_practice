@@ -14,11 +14,11 @@ public enum ClaimProcessorType {
     //의존성이 모두 주입된 인스턴스를 반환한다.
 
     //접수
-    AC(() -> (AcceptProcessor.getInstance())),
+    AC(AcceptProcessor::getInstance),
     //완료
-    CP(() -> (CompleteProcessor.getInstance())),
+    CP(CompleteProcessor::getInstance),
     //철회
-    WD(() -> (WithdrawalProcessor.getInstance()));
+    WD(WithdrawalProcessor::getInstance);
 
     private final Supplier<ClaimProcessor> supplier;
 
