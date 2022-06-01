@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 @RequiredArgsConstructor
 public enum ClaimProcessorType {
 
-    //의존성이 모두 주입된 인스턴스를 반환한다.
+    //TODO 아래의 객체들은 모두 싱글톤으로 생성 - 문제점 생각해보기
 
     //접수
     AC(AcceptProcessor::getInstance),
@@ -22,7 +22,7 @@ public enum ClaimProcessorType {
 
     private final Supplier<ClaimProcessor> supplier;
 
-    public ClaimProcessor getClaimProcessor(){
+    public ClaimProcessor getClaimProcessor() {
         return supplier.get();
     }
 

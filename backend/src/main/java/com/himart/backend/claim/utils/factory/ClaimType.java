@@ -18,7 +18,7 @@ public enum ClaimType {
     //교환철회
     EW(() -> Exchange.getInstance(ClaimProcessorType.WD.getClaimProcessor())),
     //반품접수
-    RA(() ->Return.getInstance(ClaimProcessorType.AC.getClaimProcessor())),
+    RA(() -> Return.getInstance(ClaimProcessorType.AC.getClaimProcessor())),
     //반품완료
     RC(() -> Return.getInstance(ClaimProcessorType.CP.getClaimProcessor())),
     //반품철회
@@ -28,7 +28,7 @@ public enum ClaimType {
 
     private final Supplier<Claim> supplier;
 
-    public Claim getClaim(){
+    public Claim getClaim() {
         return supplier.get();
     }
 }
