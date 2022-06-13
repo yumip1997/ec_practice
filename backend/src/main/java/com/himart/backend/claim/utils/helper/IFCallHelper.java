@@ -6,14 +6,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class IFCallHelper {
-
+    
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void callCouponRestorHelper(){
+    public void callRestoreCouponIF(){
         System.out.println("쿠폰 복원 API 호출");
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void callPaymentHelper(){
+    public void callPaymentIF(){
         System.out.println("결제 IF 호출");
     }
 

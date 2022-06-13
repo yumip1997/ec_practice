@@ -14,12 +14,12 @@ public class ClaimDataManipulator {
     private final ClaimDao claimDao;
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void insertOrderLog(ClaimBase claimBase) {
+    public void insertMonitoringLog(ClaimBase claimBase) {
         System.out.println("모니터링 로그 insert");
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void updateOrderLog(ClaimBase claimBase) {
+    public void updateMonitoringLog(ClaimBase claimBase) {
         System.out.println("모니터링 로그 update");
     }
 

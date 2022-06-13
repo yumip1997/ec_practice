@@ -3,6 +3,7 @@ package com.himart.backend.claim.utils.processor;
 import com.himart.backend.claim.dto.ClaimDto;
 import com.himart.backend.claim.model.ClaimBase;
 import com.himart.backend.claim.utils.creator.ClaimDataCreator;
+import com.himart.backend.claim.utils.helper.MonitoringLogHelper;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.extern.log4j.Log4j2;
@@ -17,8 +18,11 @@ public class WithdrawalProcessor extends ClaimProcessor {
 
     private static WithdrawalProcessor withdrawalProcessor;
 
-    public WithdrawalProcessor(ClaimValidator claimValidator, ClaimDataCreator claimDataCreator, ClaimDataManipulator claimDataManipulator) {
-        super(claimValidator, claimDataCreator, claimDataManipulator);
+    public WithdrawalProcessor(ClaimValidator claimValidator,
+                               ClaimDataCreator claimDataCreator,
+                               ClaimDataManipulator claimDataManipulator,
+                               MonitoringLogHelper monitoringLogHelper) {
+        super(claimValidator, claimDataCreator, claimDataManipulator, monitoringLogHelper);
     }
 
     @PostConstruct
@@ -31,26 +35,23 @@ public class WithdrawalProcessor extends ClaimProcessor {
     }
 
     @Override
-    public void doValidationProcess(ClaimDto claimDto) {
-        claimValidator.isValid(claimDto);
-    }
-
-    @Override
     public void doClaimDataManipulationProcess(ClaimDto claimDto) {
-        ClaimBase claimBase = claimDataCreator.getInsertClaimData(claimDto);
-        claimDataManipulator.insertClaimData(claimBase);
+        insertClaimData(claimDto);
+        updateClaimData(claimDto);
     }
 
     @Transactional
     @Override
     public void doProcess(ClaimDto claimDto) {
         try {
+            //TODO 채번로직 추가
+            monitoringLogHelper.insertMonitoringLog("");
             doValidationProcess(claimDto);
-            doInsertMonitoringLog(claimDto);
             doClaimDataManipulationProcess(claimDto);
-            doUpdateMonitoringLog(claimDto);
+            verifyAmount(claimDto);
         } catch (Exception e) {
             log.error(e.getMessage());
+            monitoringLogHelper.updateMonitoringLog("");
         }
     }
 }

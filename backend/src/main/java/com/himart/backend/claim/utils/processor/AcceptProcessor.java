@@ -1,8 +1,8 @@
 package com.himart.backend.claim.utils.processor;
 
 import com.himart.backend.claim.dto.ClaimDto;
-import com.himart.backend.claim.model.ClaimBase;
 import com.himart.backend.claim.utils.creator.ClaimDataCreator;
+import com.himart.backend.claim.utils.helper.MonitoringLogHelper;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.extern.log4j.Log4j2;
@@ -17,11 +17,11 @@ public class AcceptProcessor extends ClaimProcessor {
 
     private static AcceptProcessor acceptProcessor;
 
-    //TODO 생성자 매개변수 리팩토링해보기
     public AcceptProcessor(ClaimValidator claimValidator,
                            ClaimDataCreator claimDataCreator,
-                           ClaimDataManipulator claimDataManipulator) {
-        super(claimValidator, claimDataCreator, claimDataManipulator);
+                           ClaimDataManipulator claimDataManipulator,
+                           MonitoringLogHelper monitoringLogHelper) {
+        super(claimValidator, claimDataCreator, claimDataManipulator, monitoringLogHelper);
     }
 
     @PostConstruct
@@ -29,32 +29,36 @@ public class AcceptProcessor extends ClaimProcessor {
         acceptProcessor = this;
     }
 
-    //TODO 시점 문제
     public static AcceptProcessor getInstance() {
         return acceptProcessor;
     }
 
     @Override
-    public void doValidationProcess(ClaimDto claimDto) {
-        claimValidator.isValid(claimDto);
-    }
-
-    @Override
     public void doClaimDataManipulationProcess(ClaimDto claimDto) {
-        ClaimBase claimBase = claimDataCreator.getInsertClaimData(claimDto);
-        claimDataManipulator.insertClaimData(claimBase);
+        insertClaimData(claimDto);
+        updateClaimData(claimDto);
     }
 
+    /*
+    (클레임 채번)
+    1. 모니터링 로그 생성
+    2. 유효성 검증
+    3. 데이터 조작(주문클레임 테이블, 주문비용테이블, 주문혜택관계 테이블, 주문혜택테이블)
+    4. 금액검증
+    Exception 발생시 모니터링 로그 업데이트
+    */
     @Transactional
     @Override
     public void doProcess(ClaimDto claimDto) {
         try {
+            //TODO 채번로직 추가
+            monitoringLogHelper.insertMonitoringLog("");
             doValidationProcess(claimDto);
-            doInsertMonitoringLog(claimDto);
             doClaimDataManipulationProcess(claimDto);
-            doUpdateMonitoringLog(claimDto);
+            verifyAmount(claimDto);
         } catch (Exception e) {
             log.error(e.getMessage());
+            monitoringLogHelper.updateMonitoringLog("");
         }
     }
 }

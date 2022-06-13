@@ -1,13 +1,10 @@
 package com.himart.backend.claim.utils.validator;
 
-import com.himart.backend.claim.com.code.ClaimProcessCode;
 import com.himart.backend.claim.dao.ClaimDao;
 import com.himart.backend.claim.dto.ClaimDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
-
-import java.util.function.Predicate;
 
 @Component
 @RequiredArgsConstructor
@@ -16,22 +13,24 @@ public class ClaimValidator {
 
     private final ClaimDao claimDao;
 
-    public void isValid(ClaimDto claimDto) {
-        try{
-            isValidStatus(claimDto);
-        }catch (Exception e){
-            log.debug(e.getMessage());
-        }
+    //주문상태체크
+    public void isValidOrderdStatus(ClaimDto claimDto) throws Exception {
     }
 
-    //TODO 간결하게 정리하기
-    private void isValidStatus(ClaimDto claimDto) throws Exception {
-        ClaimProcessCode code = claimDao.getCurrentClaimProcessCode(claimDto);
+    //상품유형체크
+    public void isValidProductType(ClaimDto claimDto) throws Exception{
 
-        ClaimProcessCode currentStatus = ClaimProcessCode.DC;
-        ClaimValidStatus validStatus = ClaimValidStatus.valueOf(claimDto.getClaimType().name());
-        if(validStatus.isContains(currentStatus)) return;
-        throw new Exception("클레임 가능 상태가 아닙니다");
+    }
+
+    //금액체크(UI에서 받은 금액과 일치여부, 주문금액, 취소금액, 환불가능금액)
+    public void isValidAmount(ClaimDto claimDto) throws Exception{
+
+    }
+
+    //금액검증(주문번호, 클레임 번호)
+    public void verifyAmount(ClaimDto claimDto) throws Exception{
+        //1. 취소 금액 == 클레임 금액
+        //2. UI 데이터 == 쿼리 결과(환불가능금액) 검증데이터
     }
 }
 
