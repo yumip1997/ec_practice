@@ -51,7 +51,7 @@ public class AcceptProcessor extends ClaimProcessor {
     @Override
     public void doProcess(ClaimDto claimDto) {
         try {
-            //TODO 채번로직 추가
+            //TODO 채번로직 추가 - claimDto.setClaimNo()?
             monitoringLogHelper.insertMonitoringLog("");
             doValidationProcess(claimDto);
             doClaimDataManipulationProcess(claimDto);

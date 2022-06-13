@@ -1,13 +1,12 @@
 package com.himart.backend.claim.utils.processor;
 
 import com.himart.backend.claim.dto.ClaimDto;
-import com.himart.backend.claim.model.ClaimBase;
+import com.himart.backend.claim.model.OrderClaim;
 import com.himart.backend.claim.utils.creator.ClaimDataCreator;
 import com.himart.backend.claim.utils.helper.MonitoringLogHelper;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 abstract public class ClaimProcessor {
@@ -25,16 +24,16 @@ abstract public class ClaimProcessor {
     abstract protected void doClaimDataManipulationProcess(ClaimDto claimDto);
 
     protected void insertClaimData(ClaimDto claimDto){
-        ClaimBase claimBase = claimDataCreator.getInsertClaimData(claimDto);
-        claimDataManipulator.insertClaimData(claimBase);
+        OrderClaim orderClaim = claimDataCreator.getInsertOrderClaimData(claimDto);
+        claimDataManipulator.insertClaimData(orderClaim);
     }
 
     protected void updateClaimData(ClaimDto claimDto){
-        ClaimBase claimBase = claimDataCreator.getUpdateClaimData(claimDto);
-        claimDataManipulator.updateClaimData(claimBase);
+        OrderClaim orderClaim = claimDataCreator.getUpdateOrderClaimData(claimDto);
+        claimDataManipulator.updateClaimData(orderClaim);
     }
 
-    public void verifyAmount(ClaimDto claimDto) throws Exception{
+    protected void verifyAmount(ClaimDto claimDto) throws Exception{
         claimValidator.verifyAmount(claimDto);
     }
     abstract public void doProcess(ClaimDto claimDto);

@@ -1,7 +1,6 @@
 package com.himart.backend.claim.utils.processor;
 
 import com.himart.backend.claim.dto.ClaimDto;
-import com.himart.backend.claim.model.ClaimBase;
 import com.himart.backend.claim.utils.creator.ClaimDataCreator;
 import com.himart.backend.claim.utils.helper.MonitoringLogHelper;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;

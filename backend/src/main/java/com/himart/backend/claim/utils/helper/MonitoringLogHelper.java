@@ -14,13 +14,13 @@ public class MonitoringLogHelper {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Long insertMonitoringLog(String json) {
-        //logDao.insertMonitoringLog(json)
-        return 0l;
+        //TODO logDao.insertMonitoringLog(json)
+        return 0L;
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void updateMonitoringLog(String json) {
-//        logDao.updateMonitoringLog(json);
+        //TODO logDao.updateMonitoringLog(json);
     }
 
 }
