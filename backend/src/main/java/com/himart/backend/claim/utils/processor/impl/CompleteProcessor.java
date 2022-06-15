@@ -49,11 +49,11 @@ public class CompleteProcessor implements ClaimProcessor {
         updateClaim(claimDataCreator.getUpdateData(claimDto));
     }
 
-    private void insertClaim(ClaimInsertBase claimInsertBase){
+    private void insertClaim(ClaimInsertBase claimInsertBase) {
         claimDataManipulateHelper.insertClaimData(claimInsertBase);
     }
 
-    private void updateClaim(ClaimUpdateBase claimUpdateBase){
+    private void updateClaim(ClaimUpdateBase claimUpdateBase) {
         claimDataManipulateHelper.updateClaimData(claimUpdateBase);
     }
 
@@ -63,19 +63,27 @@ public class CompleteProcessor implements ClaimProcessor {
         claimValidator.verifyAmount(claimDto);
     }
 
+
+    /*
+        1. 모니터링 로그 insert
+        2. validation 체크
+        3. 주문클레임 or 주문비용 or 주문혜택관계 or 주문혜택 테이블 insert or update
+        4. 금액검증
+        5. 결제 인터페이스 호출
+        6. 쿠폰 복원 인터페이스 호출
+    */
     @Override
     public void doProcess(ClaimDto claimDto) {
-        try{
-            //TODO 채번로직 추가하기
+        try {
             monitoringLogHelper.insertMonitoringLog("");
             doValidationProcess(claimDto);
             doClaimDataManipulationProcess(claimDto);
             verifyAmount(claimDto);
             ifCallHelper.callPaymentIF();
             ifCallHelper.callRestoreCouponIF();
-        }catch (Exception e){
+        } catch (Exception e) {
             log.error(e.getMessage());
-        }finally {
+        } finally {
             monitoringLogHelper.updateMonitoringLog("");
         }
     }

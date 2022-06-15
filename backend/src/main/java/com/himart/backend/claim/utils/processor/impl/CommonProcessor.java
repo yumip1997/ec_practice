@@ -61,6 +61,13 @@ public class CommonProcessor implements ClaimProcessor {
         claimValidator.verifyAmount(claimDto);
     }
 
+    /*
+    1. 클레임 번호 채번
+    2. 모니터링 로그 insert
+    3. validation 체크
+    4. 주문클레임 or 주문비용 or 주문혜택관계 or 주문혜택 테이블 insert or update
+    5. 금액검증
+     */
     @Override
     public void doProcess(ClaimDto claimDto) {
         try{
