@@ -5,11 +5,6 @@ spring:
     username: postgres
     password: 12345
 
-mybatis:
-  mapper-locations: classpath:mybatis/mapper/**/*.xml
-  config-location: classpath:mybatis/mybatis-config.xml
-  type-aliases-package:
-
 logging:
   level:
     jdbc:
