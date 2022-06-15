@@ -1,6 +1,7 @@
-package com.himart.backend.claim.utils.creator;
+package com.himart.backend.claim.utils.creator.impl;
 
 import com.himart.backend.claim.dao.ClaimDao;
+import com.himart.backend.claim.utils.creator.ClaimDataCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +9,7 @@ import javax.annotation.PostConstruct;
 
 @RequiredArgsConstructor
 @Component
-public class EcouponCancelAcceptDataCreator implements ClaimDataCreator{
+public class ReturnAcceptDataCreator implements ClaimDataCreator {
 
     private static ClaimDataCreator claimDataCreator;
     private final ClaimDao claimDao;

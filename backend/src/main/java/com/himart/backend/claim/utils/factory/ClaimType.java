@@ -1,6 +1,7 @@
 package com.himart.backend.claim.utils.factory;
 
 import com.himart.backend.claim.utils.creator.*;
+import com.himart.backend.claim.utils.creator.impl.*;
 import com.himart.backend.claim.utils.processor.AcceptProcessor;
 import com.himart.backend.claim.utils.processor.ClaimProcessor;
 import com.himart.backend.claim.utils.processor.CompleteProcessor;
@@ -31,9 +32,9 @@ public enum ClaimType {
     RW("RW", WithdrawalProcessor::getInstance, ReturnWithdrawalDataCreator::getInstance, Arrays.asList(), Boolean.TRUE),
 
     //교환접수
-    EA("EA", AcceptProcessor::getInstance, GeneralCancelDataCreator::getInstance, Arrays.asList(), Boolean.TRUE),
+    EA("EA", AcceptProcessor::getInstance, ExchangeAcceptDataCreator::getInstance, Arrays.asList(), Boolean.TRUE),
     //교환철회
-    EW("EW", WithdrawalProcessor::getInstance, GeneralCancelDataCreator::getInstance, Arrays.asList(), Boolean.TRUE);
+    EW("EW", WithdrawalProcessor::getInstance, ExchangeWithdrawalDataCreator::getInstance, Arrays.asList(), Boolean.TRUE);
 
     private final String code;
     private final Supplier<ClaimProcessor> claimProcessor;

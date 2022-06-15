@@ -1,15 +1,15 @@
-package com.himart.backend.claim.utils.creator;
+package com.himart.backend.claim.utils.creator.impl;
 
 import com.himart.backend.claim.dao.ClaimDao;
+import com.himart.backend.claim.utils.creator.ClaimDataCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-@Component
 @RequiredArgsConstructor
-public class GeneralCancelDataCreator implements ClaimDataCreator{
-
+@Component
+public class ExchangeWithdrawalDataCreator implements ClaimDataCreator{
     private static ClaimDataCreator claimDataCreator;
     private final ClaimDao claimDao;
 
@@ -21,5 +21,4 @@ public class GeneralCancelDataCreator implements ClaimDataCreator{
     public static ClaimDataCreator getInstance(){
         return claimDataCreator;
     }
-
 }
