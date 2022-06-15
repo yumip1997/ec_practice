@@ -10,7 +10,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
-public enum OrderClaimCode {
+public enum OrderClaimBaseCode {
 
     //일반상품주문취소완료
     GCC(Arrays.asList(OrderClaim.builder().claimCode("C").orderStateCode("CC").build()), Collections.emptyList()),
