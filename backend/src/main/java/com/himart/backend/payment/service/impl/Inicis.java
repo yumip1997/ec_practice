@@ -5,7 +5,9 @@ import com.himart.backend.payment.dto.NetCancelReq;
 import com.himart.backend.payment.dto.OriginOrder;
 import com.himart.backend.payment.dto.PayInfo;
 import com.himart.backend.payment.service.PaymentService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Inicis implements PaymentService {
 
     //TODO validateAuth는 언제?

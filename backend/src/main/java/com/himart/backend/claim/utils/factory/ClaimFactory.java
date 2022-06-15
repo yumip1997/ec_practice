@@ -37,7 +37,7 @@ public enum ClaimFactory {
     private final Supplier<ClaimDataCreator> claimDataCreatorSupplier;
     private final Supplier<ClaimValidator> claimValidatorSupplier;
 
-    //TODO 이름 잘못들어오면 예외 throw
+    //TODO 이름 잘못들어오면 예외 throw?
     public static ClaimProcessor findClaimProcessor(String name){
         return ClaimFactory.valueOf(name).claimProcessorSupplier.get();
     }
