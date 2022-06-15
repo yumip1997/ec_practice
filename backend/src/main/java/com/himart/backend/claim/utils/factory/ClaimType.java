@@ -1,5 +1,6 @@
 package com.himart.backend.claim.utils.factory;
 
+import com.himart.backend.claim.com.code.ClaimException;
 import com.himart.backend.claim.utils.creator.*;
 import com.himart.backend.claim.utils.creator.impl.*;
 import com.himart.backend.claim.utils.processor.AcceptProcessor;
@@ -47,6 +48,6 @@ public enum ClaimType {
                 .filter(type -> type.getCode().equals(code))
                 .findFirst()
                 .map(claimType -> claimType.getClaimProcessor().get())
-                .orElseThrow(() -> new Exception("클레임 타입이 올바르지 않습니다!"));
+                .orElseThrow(() -> new Exception(ClaimException.INVALID_CLAIM_TYPE.EXCEPTION_MSG));
     };
 }
