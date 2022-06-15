@@ -2,6 +2,7 @@ package com.himart.backend.claim.utils.processor;
 
 import com.himart.backend.claim.dto.ClaimDto;
 import com.himart.backend.claim.utils.creator.ClaimDataCreator;
+import com.himart.backend.claim.utils.factory.ClaimType;
 import com.himart.backend.claim.utils.helper.MonitoringLogHelper;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
@@ -18,10 +19,9 @@ public class WithdrawalProcessor extends ClaimProcessor {
     private static WithdrawalProcessor withdrawalProcessor;
 
     public WithdrawalProcessor(ClaimValidator claimValidator,
-                               ClaimDataCreator claimDataCreator,
                                ClaimDataManipulator claimDataManipulator,
                                MonitoringLogHelper monitoringLogHelper) {
-        super(claimValidator, claimDataCreator, claimDataManipulator, monitoringLogHelper);
+        super(claimValidator,  claimDataManipulator, monitoringLogHelper);
     }
 
     @PostConstruct
@@ -35,14 +35,14 @@ public class WithdrawalProcessor extends ClaimProcessor {
 
     @Override
     public void doClaimDataManipulationProcess(ClaimDto claimDto) {
-        insertClaimData(claimDto);
-        updateClaimData(claimDto);
+
     }
 
     @Transactional
     @Override
     public void doProcess(ClaimDto claimDto) {
         try {
+            ClaimDataCreator claimDataCreator = ClaimType.valueOf(claimDto.getClaimType()).getClaimDataCreator().get();
             //TODO 채번로직 추가
             monitoringLogHelper.insertMonitoringLog("");
             doValidationProcess(claimDto);

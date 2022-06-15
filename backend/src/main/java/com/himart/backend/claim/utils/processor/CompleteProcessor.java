@@ -2,6 +2,7 @@ package com.himart.backend.claim.utils.processor;
 
 import com.himart.backend.claim.dto.ClaimDto;
 import com.himart.backend.claim.utils.creator.ClaimDataCreator;
+import com.himart.backend.claim.utils.factory.ClaimType;
 import com.himart.backend.claim.utils.helper.IFCallHelper;
 import com.himart.backend.claim.utils.helper.MonitoringLogHelper;
 import com.himart.backend.claim.utils.manipulator.ClaimDataManipulator;
@@ -20,11 +21,10 @@ public class CompleteProcessor extends ClaimProcessor {
     private final IFCallHelper ifCallHelper;
 
     public CompleteProcessor(ClaimValidator claimValidator
-            , ClaimDataCreator claimDataCreator
             , ClaimDataManipulator claimDataManipulator
             , MonitoringLogHelper monitoringLogHelper
             , IFCallHelper ifCallHelper) {
-        super(claimValidator, claimDataCreator, claimDataManipulator, monitoringLogHelper);
+        super(claimValidator, claimDataManipulator, monitoringLogHelper);
         this.ifCallHelper = ifCallHelper;
     }
 
@@ -39,7 +39,8 @@ public class CompleteProcessor extends ClaimProcessor {
 
     @Override
     public void doClaimDataManipulationProcess(ClaimDto claimDto) {
-        updateClaimData(claimDto);
+
+
     }
 
     public void doIFCallProcess(ClaimDto claimDto) {
@@ -51,6 +52,7 @@ public class CompleteProcessor extends ClaimProcessor {
     public void doProcess(ClaimDto claimDto) {
         try{
             //TODO 채번로직 추가
+            ClaimDataCreator claimDataCreator = ClaimType.valueOf(claimDto.getClaimType()).getClaimDataCreator().get();
             monitoringLogHelper.insertMonitoringLog("");
             doValidationProcess(claimDto);
             doClaimDataManipulationProcess(claimDto);
