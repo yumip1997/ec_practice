@@ -1,4 +1,4 @@
-package com.himart.backend.claim.utils.code;
+package com.himart.backend.claim.utils.creator.code;
 
 import com.himart.backend.claim.model.OrderClaim;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
-public enum OrderClaimEnum {
+public enum OrderClaimCode {
 
     //일반상품주문취소완료
     GCC(Arrays.asList(OrderClaim.builder().claimCode("C").orderStateCode("CC").build()), Collections.emptyList()),

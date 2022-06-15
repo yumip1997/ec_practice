@@ -1,6 +1,9 @@
 package com.himart.backend.claim.utils.creator.impl;
 
 import com.himart.backend.claim.dao.ClaimDao;
+import com.himart.backend.claim.dto.ClaimDto;
+import com.himart.backend.claim.model.ClaimInsertBase;
+import com.himart.backend.claim.model.ClaimUpdateBase;
 import com.himart.backend.claim.utils.creator.ClaimDataCreator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,5 +23,15 @@ public class ExchangeWithdrawalDataCreator implements ClaimDataCreator{
 
     public static ClaimDataCreator getInstance(){
         return claimDataCreator;
+    }
+
+    @Override
+    public ClaimInsertBase getInsertData(ClaimDto claimDto) {
+        return null;
+    }
+
+    @Override
+    public ClaimUpdateBase getUpdateData(ClaimDto claimDto) {
+        return null;
     }
 }
