@@ -1,5 +1,6 @@
 package com.himart.backend.order.service;
 
+import com.himart.backend.order.dao.OrderDao;
 import com.himart.backend.order.dto.OrderRequest;
 import com.himart.backend.order.utils.after.AfterStrategy;
 import com.himart.backend.order.utils.context.OrderContext;
@@ -13,13 +14,13 @@ public class OrderService {
 
     private final OrderHistoryService orderHistoryService;
     private final PaymentService paymentService;
-
-    private final OrderContext orderContext;
+    private final OrderDao orderDao;
 
     public void order(OrderRequest orderRequest){
         DataStrategy dataStrategy = getDataStrategy(orderRequest);
         AfterStrategy afterStrategy = getAfterStrategy(orderRequest);
 
+        OrderContext orderContext = new OrderContext(orderHistoryService, paymentService, orderDao);
         orderContext.execute(dataStrategy, afterStrategy, orderRequest);
     }
 

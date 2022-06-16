@@ -5,6 +5,4 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum OrderValidator {
 
-
-
 }
