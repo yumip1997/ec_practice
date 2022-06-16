@@ -1,12 +1,17 @@
 package com.himart.backend.claim.utils.validator.impl;
 
+import com.himart.backend.claim.com.code.ClaimException;
 import com.himart.backend.claim.dao.ClaimDao;
 import com.himart.backend.claim.dto.ClaimDto;
+import com.himart.backend.claim.model.OrderClaim;
+import com.himart.backend.claim.utils.factory.ClaimFactory;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
+import com.himart.backend.claim.utils.validator.code.ClaimValidStatusCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -33,11 +38,27 @@ public class ClaimCommonValidator implements ClaimValidator {
 
     //주문상태체크
     public void isValidOrderdStatus(ClaimDto claimDto) throws Exception {
+        OrderClaim currentClaim = null; // TODO claimDao.selectClaim(claimDto);
+        String currentClaimProcess = currentClaim.getClaimCode();
+        List<String> validStatusList =  ClaimValidStatusCode.valueOf(claimDto.getClaimType()).getValidOrderStatus();
+
+        if(isContainInList(validStatusList, currentClaimProcess)) return;
+
+        throw new Exception(ClaimException.INVALID_ORDER_STATUS.EXCEPTION_MSG);
     }
 
     //상품유형체크
     public void isValidProductType(ClaimDto claimDto) throws Exception{
+        String currentPrdType = claimDto.getProductType();
+        List<String> validPrdTypeList = ClaimValidStatusCode.valueOf(claimDto.getClaimType()).getValidProductType();
 
+        if(isContainInList(validPrdTypeList, currentPrdType)) return;
+
+        throw new Exception(ClaimException.INVALID_PRD_TPYE.EXCEPTION_MSG);
+    }
+
+    private boolean isContainInList(List<String> list, String target){
+        return list.contains(target);
     }
 
     //금액체크(UI에서 받은 금액과 일치여부, 주문금액, 취소금액, 환불가능금액)

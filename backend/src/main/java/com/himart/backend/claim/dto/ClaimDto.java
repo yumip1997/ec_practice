@@ -17,4 +17,5 @@ public class ClaimDto {
     private String claimNo;
     //주문번호
     private String orderNo;
+    private String productType;
 }

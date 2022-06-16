@@ -9,8 +9,10 @@ import com.himart.backend.order.service.PaymentService;
 import com.himart.backend.order.utils.after.AfterStrategy;
 import com.himart.backend.order.utils.creator.DataStrategy;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
+@Component
 public class OrderContext {
 
     private final OrderHistoryService orderHistoryService;
