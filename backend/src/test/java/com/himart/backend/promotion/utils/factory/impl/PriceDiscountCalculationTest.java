@@ -77,7 +77,7 @@ class PriceDiscountCalculationTest {
     @Test
     @DisplayName("가격조정 프로모션이 적용된 상품의 가격정보 테스트")
     void price_discout_test(){
-        PrmRequestBase prmRequestBase = new PrmRequestBase();
+        PrmRequestBase prmRequestBase = PrmRequestBase.builder().build();
         PriceDiscountResponseVO priceDiscountResponseVO = (PriceDiscountResponseVO) priceDiscountCalculation.getCalculationData(prmRequestBase);
         List<Product> prdList = priceDiscountResponseVO.getProductList();
 
