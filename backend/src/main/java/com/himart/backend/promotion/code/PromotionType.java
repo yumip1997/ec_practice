@@ -1,8 +1,12 @@
 package com.himart.backend.promotion.code;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
+
 @RequiredArgsConstructor
+@Getter
 public enum PromotionType {
 
     //가격조정
@@ -13,4 +17,10 @@ public enum PromotionType {
     CART_COUPNT("CC");
 
     private final String code;
+
+    public static PromotionType findPromotionType(String code){
+        return Arrays.stream(PromotionType.values())
+                .filter(promotionType -> promotionType.getCode().equals(code))
+                .findFirst().orElse(null);
+    }
 }

@@ -8,17 +8,17 @@ import com.himart.backend.promotion.dto.request.PrmRequestBase;
 import com.himart.backend.promotion.dto.response.PriceDiscountResponseVO;
 import com.himart.backend.promotion.dto.response.ResponseBaseVO;
 import com.himart.backend.promotion.utils.factory.Calculation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
+@Component
 public class PriceDiscountCalculation implements Calculation {
 
     private final PrmDao prmDao;
-
-    public PriceDiscountCalculation(PrmDao prmDao){
-        this.prmDao = prmDao;
-    }
 
     @Override
     public ResponseBaseVO getCalculationData(PrmRequestBase prmRequestBase) {
@@ -62,7 +62,8 @@ public class PriceDiscountCalculation implements Calculation {
     }
 
     public List<ApplicablePromotionVO> getApplicablePromotionList(PrmRequestBase prmRequestBase) {
-        return prmDao.getApplicablePromotionList(prmRequestBase);
+        //TODO prmDao.getApplicablePromotionList
+        return new ArrayList<>();
     }
 
 }
