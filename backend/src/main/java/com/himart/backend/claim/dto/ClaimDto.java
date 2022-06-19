@@ -1,10 +1,12 @@
 package com.himart.backend.claim.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class ClaimDto {
     //클레임 타입
     private String claimType;

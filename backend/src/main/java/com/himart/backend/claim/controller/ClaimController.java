@@ -14,7 +14,7 @@ public class ClaimController {
     private final ClaimService claimService;
 
     @PostMapping("/claim")
-    public void claim(@RequestBody ClaimDto claimDto) throws Exception {
+    public void claim(@RequestBody ClaimDto claimDto){
         claimService.claim(claimDto);
     }
 }

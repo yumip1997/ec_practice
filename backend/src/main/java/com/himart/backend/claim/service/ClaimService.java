@@ -13,7 +13,7 @@ public class ClaimService {
     /*
     요청 업무에 따른 클레임 객체를 생성한 후 클레임 로직을 수행한다.
      */
-    public void claim(ClaimDto claimDto) throws Exception {
+    public void claim(ClaimDto claimDto){
 
         try{
             ClaimProcessor claimProcessor = ClaimFactory.findClaimProcessor(claimDto.getClaimType());

@@ -13,6 +13,6 @@ import java.util.List;
 @Setter
 public class PriceDiscountResponseVO extends ResponseBaseVO {
 
-    private List<Product> product;
+    private List<Product> productList;
 
 }

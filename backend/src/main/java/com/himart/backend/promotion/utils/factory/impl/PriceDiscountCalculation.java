@@ -8,7 +8,6 @@ import com.himart.backend.promotion.dto.request.PrmRequestBase;
 import com.himart.backend.promotion.dto.response.PriceDiscountResponseVO;
 import com.himart.backend.promotion.dto.response.ResponseBaseVO;
 import com.himart.backend.promotion.utils.factory.Calculation;
-import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ public class PriceDiscountCalculation implements Calculation {
         }
 
         priceDiscountResponseVO.setMemberNo(prmRequestBase.getMemberNo());
-        priceDiscountResponseVO.setProduct(priceDiscountAppliedProductList);
+        priceDiscountResponseVO.setProductList(priceDiscountAppliedProductList);
 
         return priceDiscountResponseVO;
     }
@@ -50,7 +49,7 @@ public class PriceDiscountCalculation implements Calculation {
 
         //적용가능한 가격조정 금액 중 할인혜택이 가장 큰 가격조정 프로모션을 가져온다.
         PromotionVO maxBnfPromotion = getMaxBenefitPrm(applicablePriceDiscountPrmList);
-        Long discountedPrice = maxBnfPromotion.getDiscountValue();
+        Long discountedPrice = maxBnfPromotion.getDiscountedPrice();
 
         //할인혜택이 가장 큰 가격조정 금액으로 Product의 가격조정금액을 셋팅한다.
         setProductDiscountedPrice(product, discountedPrice);

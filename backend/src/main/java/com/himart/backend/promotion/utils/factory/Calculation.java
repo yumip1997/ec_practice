@@ -13,11 +13,11 @@ public interface Calculation {
 
     ResponseBaseVO getCalculationData(PrmRequestBase prmRequestBase);
 
-    default PromotionVO getMaxBenefitPrm(List<PromotionVO> promotionVOList){ ;
+    default PromotionVO getMaxBenefitPrm(List<PromotionVO> promotionVOList){
         return promotionVOList.stream()
-                .max(Comparator.comparingLong(PromotionVO::getDiscountedPrice))
+                .min(Comparator.comparingLong(PromotionVO::getDiscountedPrice))
                 .orElse(PromotionVO.builder().build());
-    };
+    }
 
     default PromotionVO setDiscountedPrice(Long productPrice, PromotionVO promotionVO){
         Long discountedPrice = getDiscountPrice(productPrice, promotionVO);

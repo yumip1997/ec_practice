@@ -1,7 +1,6 @@
 package com.himart.backend.promotion.code;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 import java.util.function.BiFunction;
@@ -12,8 +11,8 @@ public enum DcCode {
     FIXED("FD", (productPrice, fixedAmount) -> productPrice - fixedAmount),
     RATE("RD", (productPrice, rate) -> productPrice  - productPrice * rate/100);
 
-    private final String code;
-    private final BiFunction<Long, Long, Long> discountFunction;
+    private String code;
+    private BiFunction<Long, Long, Long> discountFunction;
 
     DcCode(String code, BiFunction<Long, Long, Long> discountFunction){
         this.code = code;
