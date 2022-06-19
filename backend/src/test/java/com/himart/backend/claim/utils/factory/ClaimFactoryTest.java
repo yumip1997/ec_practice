@@ -19,12 +19,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ClaimFactoryTest {
 
     @Test
-    @DisplayName("일반상품주문취소완료")
+    @DisplayName("일반상품주문취소완료의")
     void general_prd_ordercanel_test(){
-        ClaimProcessor claimProcessor = ClaimFactory.findClaimProcessor("GCC");
-        ClaimDataCreator claimDataCreator = ClaimFactory.findClaimDataCreator("GCC");
-        ClaimValidator claimValidator = ClaimFactory.findClaimValidator("GCC");
+        //given
+        String type = "GCC";
 
+        //when
+        ClaimProcessor claimProcessor = ClaimFactory.findClaimProcessor(type);
+        ClaimDataCreator claimDataCreator = ClaimFactory.findClaimDataCreator(type);
+        ClaimValidator claimValidator = ClaimFactory.findClaimValidator(type);
+
+        //then
         Assertions.assertThat(claimProcessor).isInstanceOf(CompleteProcessor.class);
         Assertions.assertThat(claimDataCreator).isInstanceOf(GeneralCancelDataCreator.class);
         Assertions.assertThat(claimValidator).isInstanceOf(ClaimCommonValidator.class);
@@ -33,10 +38,15 @@ class ClaimFactoryTest {
     @Test
     @DisplayName("모바일쿠폰주문취소접수")
     void ecoupon_ordercanel_accept_test(){
-        ClaimProcessor claimProcessor = ClaimFactory.findClaimProcessor("MCA");
-        ClaimDataCreator claimDataCreator = ClaimFactory.findClaimDataCreator("MCA");
-        ClaimValidator claimValidator = ClaimFactory.findClaimValidator("MCA");
+        //given
+        String type = "MCA";
 
+        //when
+        ClaimProcessor claimProcessor = ClaimFactory.findClaimProcessor(type);
+        ClaimDataCreator claimDataCreator = ClaimFactory.findClaimDataCreator(type);
+        ClaimValidator claimValidator = ClaimFactory.findClaimValidator(type);
+
+        //then
         Assertions.assertThat(claimProcessor).isInstanceOf(CommonProcessor.class);
         Assertions.assertThat(claimDataCreator).isInstanceOf(EcouponCancelAcceptDataCreator.class);
         Assertions.assertThat(claimValidator).isInstanceOf(ClaimCommonValidator.class);

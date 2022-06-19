@@ -15,7 +15,9 @@ class ClaimServiceTest {
     @Test
     @DisplayName("클레임 타입이 잘못되었을 경우 예외를 catch한 후 log를 남긴다.")
     void exception_catch_test(){
+        //given
         ClaimDto claimDto = ClaimDto.builder().claimType("XXX").build();
+        //when
         claimService.claim(claimDto);
     }
 
