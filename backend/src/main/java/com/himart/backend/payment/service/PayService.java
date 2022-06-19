@@ -15,9 +15,7 @@ public class PayService {
 
     private final PaymentServiceFactory paymentServiceFactory;
 
-
     public ApproveRes approve(PayInfo payInfo){
-        //이니시스인지 포인트인지 PaymentType으로 찾음
         PaymentService paymentService = paymentServiceFactory.getPaymentService(payInfo.getPaymentType());
         return paymentService.approvePay(payInfo);
     }

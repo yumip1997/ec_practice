@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Inicis implements PaymentService {
 
-    //TODO validateAuth는 언제?
     @Override
     public void validateAuth(PayInfo payInfo) {
 
@@ -18,7 +17,7 @@ public class Inicis implements PaymentService {
 
     @Override
     public ApproveRes approvePay(PayInfo payInfo) {
-        return null;
+        return new ApproveRes();
     }
 
     @Override
