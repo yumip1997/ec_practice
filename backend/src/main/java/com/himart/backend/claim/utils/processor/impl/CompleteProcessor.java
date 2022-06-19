@@ -77,7 +77,7 @@ public class CompleteProcessor implements ClaimProcessor {
         Long logKey = null;
 
         try {
-            logKey = monitoringLogHelper.insertMonitoringLog("");
+            logKey = monitoringLogHelper.insertMonitoringLog(claimDto.toString());
             doValidationProcess(claimDto);
             doClaimDataManipulationProcess(claimDto);
             verifyAmount(claimDto);
@@ -86,7 +86,7 @@ public class CompleteProcessor implements ClaimProcessor {
         } catch (Exception e) {
             log.error(e.getMessage());
         } finally {
-            monitoringLogHelper.updateMonitoringLog("", logKey);
+            monitoringLogHelper.updateMonitoringLog(logKey,  "");
         }
     }
 }

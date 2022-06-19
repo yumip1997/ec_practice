@@ -80,7 +80,7 @@ public class CommonProcessor implements ClaimProcessor {
         }catch (Exception e){
             log.error(e.getMessage());
         }finally {
-            monitoringLogHelper.updateMonitoringLog("", logKey);
+            monitoringLogHelper.updateMonitoringLog(logKey, "");
         }
     }
     
