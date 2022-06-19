@@ -1,21 +1,13 @@
 package com.himart.backend.claim.utils.validator.impl;
 
 import com.himart.backend.claim.com.code.ProductTypeCode;
-import com.himart.backend.claim.dao.ClaimDao;
 import com.himart.backend.claim.dto.ClaimDto;
-import com.himart.backend.claim.model.OrderBenefit;
-import com.himart.backend.claim.model.OrderBenefitRelation;
-import com.himart.backend.claim.model.OrderClaim;
-import com.himart.backend.claim.model.OrderCost;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class ClaimCommonValidatorTest {
