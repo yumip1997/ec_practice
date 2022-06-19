@@ -74,8 +74,10 @@ public class CompleteProcessor implements ClaimProcessor {
     */
     @Override
     public void doProcess(ClaimDto claimDto) {
+        Long logKey = null;
+
         try {
-            monitoringLogHelper.insertMonitoringLog("");
+            logKey = monitoringLogHelper.insertMonitoringLog("");
             doValidationProcess(claimDto);
             doClaimDataManipulationProcess(claimDto);
             verifyAmount(claimDto);
@@ -84,7 +86,7 @@ public class CompleteProcessor implements ClaimProcessor {
         } catch (Exception e) {
             log.error(e.getMessage());
         } finally {
-            monitoringLogHelper.updateMonitoringLog("");
+            monitoringLogHelper.updateMonitoringLog("", logKey);
         }
     }
 }

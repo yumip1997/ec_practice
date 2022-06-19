@@ -19,7 +19,7 @@ public class MonitoringLogHelper {
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void updateMonitoringLog(String json) {
+    public void updateMonitoringLog(String json, Long logKey) {
         //TODO logDao.updateMonitoringLog(json);
     }
 

@@ -33,7 +33,12 @@ public class GeneralCancelDataCreator implements ClaimDataCreator {
 
     @Override
     public ClaimInsertBase getInsertData(ClaimDto claimDto) {
-        return null;
+        ClaimInsertBase claimInsertBase = ClaimInsertBase.builder().build();
+
+        List<OrderClaim> orderClaimList = getOrderClaimList(claimDto);
+        claimInsertBase.setOrderClaimList(orderClaimList);
+
+        return claimInsertBase;
     }
 
     @Override

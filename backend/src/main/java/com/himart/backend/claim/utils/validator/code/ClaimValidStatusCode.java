@@ -13,9 +13,9 @@ import java.util.List;
 public enum ClaimValidStatusCode {
 
     //일반상품주문취소완료
-    GCC(Arrays.asList(), Arrays.asList(ProductTypeCode.GENERAL.code)),
+    GCC(Arrays.asList(ClaimProcessCode.ORDER_COMPLETE.code), Arrays.asList(ProductTypeCode.GENERAL.code)),
     //모바일쿠폰주문취소접수
-    MCA(Arrays.asList(ClaimProcessCode.SEND_COMPLETE.code), Arrays.asList(ProductTypeCode.ECOUPON.code)),
+    MCA(Arrays.asList(ClaimProcessCode.ORDER_COMPLETE.code), Arrays.asList(ProductTypeCode.ECOUPON.code)),
     //모바일쿠폰주문취소완료
     MCC(Arrays.asList(ClaimProcessCode.CANCEL_ACCEPT.code), Arrays.asList(ProductTypeCode.ECOUPON.code)),
 

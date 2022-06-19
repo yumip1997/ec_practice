@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ClaimProcessCode {
 
+    //주문완료
+    ORDER_COMPLETE("OCP"),
     //취소접수
     CANCEL_ACCEPT("CA"),
     //발송완료

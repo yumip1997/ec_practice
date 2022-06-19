@@ -70,16 +70,17 @@ public class CommonProcessor implements ClaimProcessor {
      */
     @Override
     public void doProcess(ClaimDto claimDto) {
+        Long logKey = null;
         try{
             setUpClaimNumber(claimDto);
-            monitoringLogHelper.insertMonitoringLog(claimDto.toString());
+            logKey = monitoringLogHelper.insertMonitoringLog(claimDto.toString());
             doValidationProcess(claimDto);
             doClaimDataManipulationProcess(claimDto);
             verifyAmount(claimDto);
         }catch (Exception e){
             log.error(e.getMessage());
         }finally {
-            monitoringLogHelper.updateMonitoringLog("");
+            monitoringLogHelper.updateMonitoringLog("", logKey);
         }
     }
     
