@@ -35,7 +35,7 @@ public class GeneralCancelDataCreator implements ClaimDataCreator {
     public ClaimInsertBase getInsertData(ClaimDto claimDto) {
         ClaimInsertBase claimInsertBase = ClaimInsertBase.builder().build();
 
-        List<OrderClaim> orderClaimList = getOrderClaimList(claimDto);
+        List<OrderClaim> orderClaimList = getInertOrderClaimList(claimDto);
         claimInsertBase.setOrderClaimList(orderClaimList);
 
         return claimInsertBase;
@@ -44,13 +44,5 @@ public class GeneralCancelDataCreator implements ClaimDataCreator {
     @Override
     public ClaimUpdateBase getUpdateData(ClaimDto claimDto) {
         return null;
-    }
-
-    private List<OrderClaim> getOrderClaimList(ClaimDto claimDto){
-        return OrderClaimBaseCode.valueOf(claimDto.getClaimType()).getInsertOrderClaim();
-    }
-
-    private List<OrderClaim> getUpdateClaimList(ClaimDto claimDto){
-        return OrderClaimBaseCode.valueOf(claimDto.getClaimType()).getUpdateOrderClaim();
     }
 }
