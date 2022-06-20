@@ -16,6 +16,13 @@ class ClaimCommonValidatorTest {
     ClaimCommonValidator claimCommonValidator;
 
     @Test
+    @DisplayName("모바일쿠폰주문취소접수의 주문상태가 발송완료 전까지 일대만 유효성 검증을 통과한다.")
+    void ecoupon_ordercancel_accept_validaOrderStatus_test() throws Exception {
+        ClaimDto claimDto = ClaimDto.builder().claimType("MCA").productType(ProductTypeCode.ECOUPON.code).build();
+        claimCommonValidator.isValidOrderdStatus(claimDto);
+    }
+
+    @Test
     @DisplayName("상품유형이 모바일쿠폰일 경우 모바일쿠폰주문취소접수의 상품유형 유효셩 검증을 통과한다.")
     void ecoupon_ordercancel_accept_validProductType_test() throws Exception {
         ClaimDto claimDto = ClaimDto.builder().claimType("MCA").productType(ProductTypeCode.ECOUPON.code).build();

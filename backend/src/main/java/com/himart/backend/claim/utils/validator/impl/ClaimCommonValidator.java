@@ -1,6 +1,7 @@
 package com.himart.backend.claim.utils.validator.impl;
 
 import com.himart.backend.claim.com.code.ClaimException;
+import com.himart.backend.claim.com.code.ClaimProcessCode;
 import com.himart.backend.claim.dao.ClaimDao;
 import com.himart.backend.claim.dto.ClaimDto;
 import com.himart.backend.claim.model.OrderClaim;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Calendar;
 import java.util.List;
 
 @Component
@@ -38,10 +40,13 @@ public class ClaimCommonValidator implements ClaimValidator {
 
     //주문상태체크
     public void isValidOrderdStatus(ClaimDto claimDto) throws Exception {
-        OrderClaim currentClaim = null; // TODO claimDao.selectClaim(claimDto);
-        String currentClaimProcess = currentClaim.getClaimCode();
+        // TODO claimDao.selectClaim(claimDto);
+        OrderClaim currentClaim = OrderClaim.builder().orderStateCode(ClaimProcessCode.ORDER_COMPLETE.code).build();
+
+        String currentClaimProcess = currentClaim.getOrderStateCode();
         List<String> validStatusList =  ClaimValidStatusCode.valueOf(claimDto.getClaimType()).getValidOrderStatus();
 
+        //현재 주문 상태가 유효한 상태에 포함되어 있으면 유효성 검사를 통과한다.
         if(isContainInList(validStatusList, currentClaimProcess)) return;
 
         throw new Exception(ClaimException.INVALID_ORDER_STATUS.EXCEPTION_MSG);

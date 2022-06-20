@@ -1,6 +1,7 @@
 package com.himart.backend.claim.utils.processor.impl;
 
 import com.himart.backend.claim.dto.ClaimDto;
+import com.himart.backend.claim.dto.LogDto;
 import com.himart.backend.claim.model.ClaimInsertBase;
 import com.himart.backend.claim.model.ClaimUpdateBase;
 import com.himart.backend.claim.utils.creator.ClaimDataCreator;
@@ -18,13 +19,17 @@ import javax.annotation.PostConstruct;
 
 @Component
 @Log4j2
-@RequiredArgsConstructor
-public class CompleteProcessor implements ClaimProcessor {
+public class CompleteProcessor extends ClaimProcessor {
 
-    private final MonitoringLogHelper monitoringLogHelper;
-    private final ClaimDataManipulateHelper claimDataManipulateHelper;
     private final IFCallHelper ifCallHelper;
     private static ClaimProcessor claimProcessor;
+
+    public CompleteProcessor(MonitoringLogHelper monitoringLogHelper,
+                             ClaimDataManipulateHelper claimDataManipulateHelper,
+                             IFCallHelper ifCallHelper) {
+        super(monitoringLogHelper, claimDataManipulateHelper);
+        this.ifCallHelper = ifCallHelper;
+    }
 
     @PostConstruct
     public void initialize() {
@@ -34,35 +39,6 @@ public class CompleteProcessor implements ClaimProcessor {
     public static ClaimProcessor getInstance() {
         return claimProcessor;
     }
-
-
-    @Override
-    public void doValidationProcess(ClaimDto claimDto) throws Exception {
-        ClaimValidator claimValidator = ClaimFactory.findClaimValidator(claimDto.getClaimType());
-        claimValidator.isValid(claimDto);
-    }
-
-    @Override
-    public void doClaimDataManipulationProcess(ClaimDto claimDto) {
-        ClaimDataCreator claimDataCreator = ClaimFactory.findClaimDataCreator(claimDto.getClaimType());
-        insertClaim(claimDataCreator.getInsertData(claimDto));
-        updateClaim(claimDataCreator.getUpdateData(claimDto));
-    }
-
-    private void insertClaim(ClaimInsertBase claimInsertBase) {
-        claimDataManipulateHelper.insertClaimData(claimInsertBase);
-    }
-
-    private void updateClaim(ClaimUpdateBase claimUpdateBase) {
-        claimDataManipulateHelper.updateClaimData(claimUpdateBase);
-    }
-
-    @Override
-    public void verifyAmount(ClaimDto claimDto) throws Exception {
-        ClaimValidator claimValidator = ClaimFactory.findClaimValidator(claimDto.getClaimType());
-        claimValidator.verifyAmount(claimDto);
-    }
-
 
     /*
         1. 모니터링 로그 insert
@@ -75,18 +51,20 @@ public class CompleteProcessor implements ClaimProcessor {
     @Override
     public void doProcess(ClaimDto claimDto) {
         Long logKey = null;
+        LogDto<ClaimInsertBase, ClaimUpdateBase> logDto = LogDto.<ClaimInsertBase, ClaimUpdateBase>builder().build();
 
         try {
+            setUpClaimNum(claimDto);
             logKey = monitoringLogHelper.insertMonitoringLog(claimDto.toString());
             doValidationProcess(claimDto);
-            doClaimDataManipulationProcess(claimDto);
+            logDto = doClaimDataManipulationProcess(claimDto);
             verifyAmount(claimDto);
             ifCallHelper.callPaymentIF();
             ifCallHelper.callRestoreCouponIF();
         } catch (Exception e) {
             log.error(e.getMessage());
         } finally {
-            monitoringLogHelper.updateMonitoringLog(logKey,  "");
+            monitoringLogHelper.updateMonitoringLog(logKey,  logDto.toString());
         }
     }
 }

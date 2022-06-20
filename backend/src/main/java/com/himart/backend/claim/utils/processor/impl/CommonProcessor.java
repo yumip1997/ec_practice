@@ -2,6 +2,7 @@ package com.himart.backend.claim.utils.processor.impl;
 
 
 import com.himart.backend.claim.dto.ClaimDto;
+import com.himart.backend.claim.dto.LogDto;
 import com.himart.backend.claim.model.ClaimInsertBase;
 import com.himart.backend.claim.model.ClaimUpdateBase;
 import com.himart.backend.claim.utils.creator.ClaimDataCreator;
@@ -9,8 +10,10 @@ import com.himart.backend.claim.utils.factory.ClaimFactory;
 import com.himart.backend.claim.utils.helper.ClaimDataManipulateHelper;
 import com.himart.backend.claim.utils.helper.MonitoringLogHelper;
 import com.himart.backend.claim.utils.processor.ClaimProcessor;
+import com.himart.backend.claim.utils.processor.code.ClaimNumFlagCode;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
@@ -18,12 +21,14 @@ import javax.annotation.PostConstruct;
 
 @Component
 @Log4j2
-@RequiredArgsConstructor
-public class CommonProcessor implements ClaimProcessor {
-    
-    private final MonitoringLogHelper monitoringLogHelper;
-    private final ClaimDataManipulateHelper claimDataManipulateHelper;
+public class CommonProcessor extends ClaimProcessor {
+
     private static ClaimProcessor claimProcessor;
+
+    public CommonProcessor(MonitoringLogHelper monitoringLogHelper,
+                           ClaimDataManipulateHelper claimDataManipulateHelper) {
+        super(monitoringLogHelper, claimDataManipulateHelper);
+    }
 
     @PostConstruct
     private void init(){
@@ -34,32 +39,6 @@ public class CommonProcessor implements ClaimProcessor {
         return claimProcessor;
     }
 
-    @Override
-    public void doValidationProcess(ClaimDto claimDto) throws Exception {
-        ClaimValidator claimValidator = ClaimFactory.findClaimValidator(claimDto.getClaimType());
-        claimValidator.isValid(claimDto);
-    }
-
-    @Override
-    public void doClaimDataManipulationProcess(ClaimDto claimDto) {
-        ClaimDataCreator claimDataCreator = ClaimFactory.findClaimDataCreator(claimDto.getClaimType());
-        insertClaim(claimDataCreator.getInsertData(claimDto));
-        updateClaim(claimDataCreator.getUpdateData(claimDto));
-    }
-    
-    private void insertClaim(ClaimInsertBase claimInsertBase){
-        claimDataManipulateHelper.insertClaimData(claimInsertBase);
-    }
-    
-    private void updateClaim(ClaimUpdateBase claimUpdateBase){
-        claimDataManipulateHelper.updateClaimData(claimUpdateBase);
-    }
-
-    @Override
-    public void verifyAmount(ClaimDto claimDto) throws Exception {
-        ClaimValidator claimValidator = ClaimFactory.findClaimValidator(claimDto.getClaimType());
-        claimValidator.verifyAmount(claimDto);
-    }
 
     /*
     1. 클레임 번호 채번
@@ -71,26 +50,20 @@ public class CommonProcessor implements ClaimProcessor {
     @Override
     public void doProcess(ClaimDto claimDto) {
         Long logKey = null;
+        LogDto<ClaimInsertBase, ClaimUpdateBase> logDto = LogDto.<ClaimInsertBase, ClaimUpdateBase>builder().build();
+
         try{
-            setUpClaimNumber(claimDto);
+            setUpClaimNum(claimDto);
             logKey = monitoringLogHelper.insertMonitoringLog(claimDto.toString());
             doValidationProcess(claimDto);
-            doClaimDataManipulationProcess(claimDto);
+            logDto = doClaimDataManipulationProcess(claimDto);
             verifyAmount(claimDto);
         }catch (Exception e){
             log.error(e.getMessage());
         }finally {
-            monitoringLogHelper.updateMonitoringLog(logKey, "");
+            monitoringLogHelper.updateMonitoringLog(logKey, logDto.toString());
         }
-    }
-    
-    private void setUpClaimNumber(ClaimDto claimDto){
-        String claimNum = getClaimNumber();
-        claimDto.setClaimNo(claimNum);
-    }
-    
-    private String getClaimNumber(){
-        return "";
+
     }
 
 }

@@ -20,4 +20,5 @@ public class ClaimDto {
     //주문번호
     private String orderNo;
     private String productType;
+    private String orderType;
 }

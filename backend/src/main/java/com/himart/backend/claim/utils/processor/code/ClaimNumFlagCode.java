@@ -1,8 +1,10 @@
 package com.himart.backend.claim.utils.processor.code;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Getter
 public enum ClaimNumFlagCode {
 
     //일반상품주문취소완료
