@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public enum OrderType {
+public enum OrderType{
     ECOUPON("EC"),
     GENERAL("GL");
 

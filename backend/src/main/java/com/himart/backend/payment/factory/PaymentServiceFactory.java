@@ -9,22 +9,21 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
 public class PaymentServiceFactory {
 
-    private final Point point;
-    private final Inicis inicis;
-
+    private final List<PaymentService> paymentServiceList;
     private Map<PaymentType, PaymentService> map = new HashMap<>();
 
     @PostConstruct
     void init(){
-        map.put(PaymentType.POINT, point);
-        map.put(PaymentType.INICIS, inicis);
+        paymentServiceList.forEach(paymentService -> map.put(paymentService.getType(), paymentService));
     }
+
 
     public PaymentService getPaymentService(PaymentType paymentType){
         return map.get(paymentType);

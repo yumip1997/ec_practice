@@ -10,27 +10,22 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
 public class CalculationFactory {
 
-    private final PriceDiscountCalculation priceDiscountCalculation;
-    private final ProductCouponCalculation productCouponCalculation;
-    private final CartCouponCalculation cartCouponCalculation;
-
     private Map<PromotionType, Calculation> map = new HashMap<>();
+    private final List<Calculation> calculation;
 
     @PostConstruct
     void init(){
-        map.put(PromotionType.PRICE_DISCOUNT, priceDiscountCalculation);
-        map.put(PromotionType.PROUDCT_COUPON, productCouponCalculation);
-        map.put(PromotionType.CART_COUPNT, cartCouponCalculation);
+        calculation.stream().forEach(c -> map.put(c.getType(), c));
     }
 
     public Calculation getCalculation(String prmTypeCode){
-        PromotionType promotionType = PromotionType.findPromotionType(prmTypeCode);
-        return map.get(promotionType);
+        return map.get(prmTypeCode);
     }
 }

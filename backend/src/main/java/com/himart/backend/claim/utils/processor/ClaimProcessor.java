@@ -11,14 +11,17 @@ import com.himart.backend.claim.utils.helper.MonitoringLogHelper;
 import com.himart.backend.claim.utils.processor.code.ClaimNumFlagCode;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @RequiredArgsConstructor
+@Log4j2
 public abstract class ClaimProcessor {
 
    protected final MonitoringLogHelper monitoringLogHelper;
    protected final ClaimDataManipulateHelper claimDataManipulateHelper;
 
    protected void setUpClaimNum(ClaimDto claimDto){
+
       boolean flag = ClaimNumFlagCode.valueOf(claimDto.getClaimType()).getFlag();
       if(!flag) return;
 

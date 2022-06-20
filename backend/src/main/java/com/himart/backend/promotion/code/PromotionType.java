@@ -14,7 +14,7 @@ public enum PromotionType {
     //상품쿠폰
     PROUDCT_COUPON("PC"),
     //장바구니쿠폰
-    CART_COUPNT("CC");
+    CART_COUPON("CC");
 
     private final String code;
 

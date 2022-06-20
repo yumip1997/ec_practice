@@ -1,6 +1,7 @@
 package com.himart.backend.promotion.utils.factory.impl;
 
 import com.himart.backend.product.dto.Product;
+import com.himart.backend.promotion.code.PromotionType;
 import com.himart.backend.promotion.dao.PrmDao;
 import com.himart.backend.promotion.dto.ApplicablePromotionVO;
 import com.himart.backend.promotion.dto.ProductCouponVO;
@@ -53,7 +54,12 @@ public class ProductCouponCalculation implements Calculation {
 
         return productCouponResponseVO;
     }
-    
+
+    @Override
+    public PromotionType getType() {
+        return PromotionType.PROUDCT_COUPON;
+    }
+
 
     public List<ApplicablePromotionVO> getApplicablePromotionList(PrmRequestBase prmRequestBase) {
         //TODO prmDao.getApplicablePromotionList

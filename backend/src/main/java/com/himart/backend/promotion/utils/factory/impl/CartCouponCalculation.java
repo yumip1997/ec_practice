@@ -1,5 +1,6 @@
 package com.himart.backend.promotion.utils.factory.impl;
 
+import com.himart.backend.promotion.code.PromotionType;
 import com.himart.backend.promotion.dto.request.PrmRequestBase;
 import com.himart.backend.promotion.dto.response.CartCouponResponseVO;
 import com.himart.backend.promotion.dto.response.ResponseBaseVO;
@@ -12,6 +13,11 @@ public class CartCouponCalculation implements Calculation {
     @Override
     public ResponseBaseVO getCalculationData(PrmRequestBase prmRequestBase) {
         return new CartCouponResponseVO();
+    }
+
+    @Override
+    public PromotionType getType() {
+        return PromotionType.CART_COUPON;
     }
 
 }

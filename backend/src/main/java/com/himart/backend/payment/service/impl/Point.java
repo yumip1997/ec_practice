@@ -1,5 +1,6 @@
 package com.himart.backend.payment.service.impl;
 
+import com.himart.backend.payment.code.PaymentType;
 import com.himart.backend.payment.dto.ApproveRes;
 import com.himart.backend.payment.dto.NetCancelReq;
 import com.himart.backend.payment.dto.OriginOrder;
@@ -27,5 +28,10 @@ public class Point implements PaymentService {
     @Override
     public void netCancel(NetCancelReq netCancelReq) {
 
+    }
+
+    @Override
+    public PaymentType getType() {
+        return PaymentType.POINT;
     }
 }

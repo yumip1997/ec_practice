@@ -20,5 +20,4 @@ public class PromotionController {
         return promotionService.getCalculationData(prmRequestBase);
     }
 
-
 }
