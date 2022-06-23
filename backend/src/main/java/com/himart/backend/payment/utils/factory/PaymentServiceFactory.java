@@ -19,10 +19,6 @@ public class PaymentServiceFactory {
     }
 
     public PaymentService getPaymentService(PaymentType paymentType){
-        try{
-            return map.get(paymentType);
-        }catch (Exception e){
-            throw new IllegalArgumentException(PaymentException.INVALID_PAYMENTTYPE.MSG);
-        }
+        return map.get(paymentType);
     }
 }

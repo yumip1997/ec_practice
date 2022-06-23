@@ -1,6 +1,6 @@
 package com.himart.backend.payment.dto;
 
-import com.himart.backend.claim.dto.OrderPayment;
+import com.himart.backend.claim.model.OrderPayment;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
