@@ -4,11 +4,12 @@ import com.himart.backend.claim.dto.ClaimDto;
 import com.himart.backend.claim.dto.LogDto;
 import com.himart.backend.claim.model.ClaimInsertBase;
 import com.himart.backend.claim.model.ClaimUpdateBase;
-import com.himart.backend.claim.utils.creator.ClaimDataCreator;
-import com.himart.backend.claim.utils.factory.ClaimFactory;
+import com.himart.backend.claim.utils.define.ClaimDefine;
+import com.himart.backend.claim.utils.factory.ClaimValidatorFactory;
+import com.himart.backend.claim.code.ClaimProcessorType;
+import com.himart.backend.claim.code.ClaimValidatorType;
 import com.himart.backend.claim.utils.helper.ClaimDataManipulateHelper;
 import com.himart.backend.claim.utils.helper.MonitoringLogHelper;
-import com.himart.backend.claim.utils.processor.code.ClaimNumFlagCode;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,12 +18,16 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public abstract class ClaimProcessor {
 
+   private final ClaimValidatorFactory claimValidatorFactory;
    protected final MonitoringLogHelper monitoringLogHelper;
    protected final ClaimDataManipulateHelper claimDataManipulateHelper;
 
-   protected void setUpClaimNum(ClaimDto claimDto){
+   public abstract void doProcess(ClaimDto claimDto);
 
-      boolean flag = ClaimNumFlagCode.valueOf(claimDto.getClaimType()).getFlag();
+   protected void setUpClaimNum(ClaimDto claimDto) throws Exception {
+      log.info("클레임 채번 로직을 진행한다.");
+
+      boolean flag = ClaimDefine.findNumFlag(claimDto);
       if(!flag) return;
 
       String claimNum = getClaimNumber();
@@ -34,15 +39,14 @@ public abstract class ClaimProcessor {
    }
 
    protected void doValidationProcess(ClaimDto claimDto) throws Exception{
-      ClaimValidator claimValidator = ClaimFactory.findClaimValidator(claimDto.getClaimType());
+      ClaimValidatorType claimValidatorType = ClaimDefine.findClaimValidatorType(claimDto);
+      ClaimValidator claimValidator = claimValidatorFactory.getClaimValidator(claimValidatorType);
+
       claimValidator.isValid(claimDto);
    }
 
    protected LogDto doClaimDataManipulationProcess(ClaimDto claimDto){
-      ClaimDataCreator claimDataCreator = ClaimFactory.findClaimDataCreator(claimDto.getClaimType());
-      ClaimInsertBase claimInsertBase = insertClaim(claimDataCreator.getInsertData(claimDto));
-      ClaimUpdateBase claimUpdateBase = updateClaim(claimDataCreator.getUpdateData(claimDto));
-      return LogDto.builder().insertData(claimInsertBase).updateData(claimUpdateBase).build();
+      return null;
    }
 
    private ClaimInsertBase insertClaim(ClaimInsertBase claimInsertBase) {
@@ -56,9 +60,12 @@ public abstract class ClaimProcessor {
    }
 
    protected void verifyAmount(ClaimDto claimDto) throws Exception {
-      ClaimValidator claimValidator = ClaimFactory.findClaimValidator(claimDto.getClaimType());
+      ClaimValidatorType claimValidatorType = ClaimDefine.findClaimValidatorType(claimDto);
+      ClaimValidator claimValidator = claimValidatorFactory.getClaimValidator(claimValidatorType);
+
       claimValidator.verifyAmount(claimDto);
    }
-   public abstract void doProcess(ClaimDto claimDto);
+
+   public abstract ClaimProcessorType getType();
 
 }

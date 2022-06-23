@@ -1,4 +1,4 @@
-package com.himart.backend.claim.com.code;
+package com.himart.backend.claim.code;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,12 @@
 package com.himart.backend.claim.model;
 
+import com.himart.backend.claim.dto.ClaimDto;
+import com.himart.backend.claim.utils.define.creator.OrderClaimBaseCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter

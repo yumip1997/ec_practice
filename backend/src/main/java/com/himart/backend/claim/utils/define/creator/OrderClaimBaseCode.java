@@ -1,4 +1,4 @@
-package com.himart.backend.claim.utils.creator.code;
+package com.himart.backend.claim.utils.define.creator;
 
 import com.himart.backend.claim.model.OrderClaim;
 import lombok.Getter;
@@ -19,12 +19,9 @@ public enum OrderClaimBaseCode {
     //모바일쿠폰주문취소완료
     MCC(Collections.emptyList(), Arrays.asList(OrderClaim.builder().orderStateCode("CC").build())),
 
-    //일반상품반품접수
-    GRA(Arrays.asList(OrderClaim.builder().claimCode("R").deliveryCode("R").orderStateCode("RA").build()), Collections.emptyList()),
-    //모바일쿠폰반품접수
-    MRA(Arrays.asList(OrderClaim.builder().claimCode("R").deliveryCode("R").orderStateCode("RA").build()), Collections.emptyList()),
-    //반품완료
-    RC(Collections.emptyList(), Arrays.asList(OrderClaim.builder().orderStateCode("RC").build())),
+
+    //반품접수
+    RA(Arrays.asList(OrderClaim.builder().claimCode("R").deliveryCode("R").orderStateCode("RA").build()), Collections.emptyList()),
     //반품철회
     RW(Arrays.asList(OrderClaim.builder().claimCode("R").deliveryCode("D").orderStateCode("RW").build()), Collections.emptyList()),
 
@@ -37,7 +34,7 @@ public enum OrderClaimBaseCode {
             Collections.emptyList()
     ),
     //교환철회
-    EC(
+    EW(
             Arrays.asList(
                     OrderClaim.builder().claimCode("XC").deliveryCode("D").orderStateCode("EW").build(),
                     OrderClaim.builder().claimCode("XC").deliveryCode("D").orderStateCode("EW").build()

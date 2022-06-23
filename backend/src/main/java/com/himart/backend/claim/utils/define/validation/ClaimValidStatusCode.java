@@ -1,12 +1,7 @@
-package com.himart.backend.claim.utils.validator.code;
+package com.himart.backend.claim.utils.define.validation;
 
-import com.himart.backend.claim.com.code.ClaimProcessCode;
-import com.himart.backend.claim.com.code.ProductTypeCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Arrays;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
