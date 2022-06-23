@@ -14,15 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@RequiredArgsConstructor
 public class CalculationFactory {
 
-    private Map<PromotionType, Calculation> map = new HashMap<>();
-    private final List<Calculation> calculation;
+    private final Map<PromotionType, Calculation> map = new HashMap<>();
 
-    @PostConstruct
-    void init(){
-        calculation.stream().forEach(c -> map.put(c.getType(), c));
+    public CalculationFactory(List<Calculation> calculation){
+        calculation.forEach(c -> map.put(c.getType(), c));
     }
 
     public Calculation getCalculation(String prmTypeCode){
