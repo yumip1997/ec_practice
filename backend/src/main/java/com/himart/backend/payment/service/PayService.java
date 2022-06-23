@@ -4,9 +4,8 @@ import com.himart.backend.payment.dto.ApproveRes;
 import com.himart.backend.payment.dto.CancelReq;
 import com.himart.backend.payment.dto.NetCancelReq;
 import com.himart.backend.payment.dto.PayInfo;
-import com.himart.backend.payment.factory.PaymentServiceFactory;
+import com.himart.backend.payment.utils.factory.PaymentServiceFactory;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service

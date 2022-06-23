@@ -1,5 +1,6 @@
-package com.himart.backend.payment.factory;
+package com.himart.backend.payment.utils.factory;
 
+import com.himart.backend.payment.code.PaymentException;
 import com.himart.backend.payment.code.PaymentType;
 import com.himart.backend.payment.service.PaymentService;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ public class PaymentServiceFactory {
         try{
             return map.get(paymentType);
         }catch (Exception e){
-            throw new IllegalArgumentException("해당하는 결제유형이 없습니다!");
+            throw new IllegalArgumentException(PaymentException.INVALID_PAYMENTTYPE.MSG);
         }
     }
 }
