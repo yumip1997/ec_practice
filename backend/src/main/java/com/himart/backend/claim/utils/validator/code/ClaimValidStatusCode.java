@@ -12,28 +12,23 @@ import java.util.List;
 @Getter
 public enum ClaimValidStatusCode {
 
-    //일반상품주문취소완료 - 출고지시 이전의 상태들, 일반상품
-    GCC(Arrays.asList(ClaimProcessCode.ORDER_COMPLETE.code), Arrays.asList(ProductTypeCode.GENERAL.code)),
-    //모바일쿠폰주문취소접수 - 발송완료 이전의 상태들, 모바일쿠폰상품
-    MCA(Arrays.asList(ClaimProcessCode.ORDER_COMPLETE.code), Arrays.asList(ProductTypeCode.ECOUPON.code)),
+    //일반상품주문취소완료
+    GCC(ClaimValidProcessCode.GCC, ClaimValidProdutTypeCode.GCC),
+    //모바일쿠폰주문취소접수
+    MCA(ClaimValidProcessCode.MCA, ClaimValidProdutTypeCode.MCA),
     //모바일쿠폰주문취소완료
-    MCC(Arrays.asList(ClaimProcessCode.CANCEL_ACCEPT.code), Arrays.asList(ProductTypeCode.ECOUPON.code)),
+    MCC(ClaimValidProcessCode.MCC, ClaimValidProdutTypeCode.MCC),
 
-    //반품접수 - 배송완료까지의 상태들
-    RA(Arrays.asList(ClaimProcessCode.DELIVERY_COMPLETE.code), Arrays.asList(ProductTypeCode.GENERAL.code, ProductTypeCode.ECOUPON.code)),
-    //반품완료
-    RC(
-            Arrays.asList(ClaimProcessCode.RETRIEVE_INSTRUCT.code, ClaimProcessCode.RETRIEVE_COMPLETE.code, ClaimProcessCode.RETURN_COMPLETE.code),
-            Arrays.asList(ProductTypeCode.GENERAL.code, ProductTypeCode.ECOUPON.code)
-    ),
+    //반품접수
+    RA(ClaimValidProcessCode.RA, ClaimValidProdutTypeCode.RA),
     //반품철회
-    RW(Arrays.asList(ClaimProcessCode.RETURN_ACCEPT.code), Arrays.asList(ProductTypeCode.GENERAL.code, ProductTypeCode.ECOUPON.code)),
+    RW(ClaimValidProcessCode.RW, ClaimValidProdutTypeCode.RW),
 
     //교환접수
-    EA(Arrays.asList(ClaimProcessCode.DELIVERY_COMPLETE.code), Arrays.asList(ProductTypeCode.GENERAL.code)),
+    EA(ClaimValidProcessCode.EA, ClaimValidProdutTypeCode.EA),
     //교환철회
-    EC(Arrays.asList(ClaimProcessCode.EXCHANGE_ACCEPT.code), Arrays.asList(ProductTypeCode.GENERAL.code));
+    EC(ClaimValidProcessCode.EC, ClaimValidProdutTypeCode.EC);
 
-    private final List<String> validOrderStatus;
-    private final List<String> validProductType;
+    private final ClaimValidProcessCode claimValidProcessCode;
+    private final ClaimValidProdutTypeCode claimValidProdutTypeCode;
 }
