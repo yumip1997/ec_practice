@@ -44,7 +44,10 @@ public class ClaimCommonValidator implements ClaimValidator {
         OrderClaim currentClaim = OrderClaim.builder().orderStateCode(ClaimProcessCode.ORDER_COMPLETE.code).build();
 
         String currentClaimProcess = currentClaim.getOrderStateCode();
-        List<String> validStatusList =  ClaimValidStatusCode.valueOf(claimDto.getClaimType()).getValidOrderStatus();
+        List<String> validStatusList =  ClaimValidStatusCode
+                .valueOf(claimDto.getClaimType())
+                .getClaimValidProcessCode()
+                .getValidOrderStatusList();
 
         //현재 주문 상태가 유효한 상태에 포함되어 있으면 유효성 검사를 통과한다.
         if(isContainInList(validStatusList, currentClaimProcess)) return;
@@ -55,7 +58,10 @@ public class ClaimCommonValidator implements ClaimValidator {
     //상품유형체크
     public void isValidProductType(ClaimDto claimDto) throws Exception{
         String currentPrdType = claimDto.getProductType();
-        List<String> validPrdTypeList = ClaimValidStatusCode.valueOf(claimDto.getClaimType()).getValidProductType();
+        List<String> validPrdTypeList = ClaimValidStatusCode
+                .valueOf(claimDto.getClaimType())
+                .getClaimValidProcessCode()
+                .getValidOrderStatusList();
 
         if(isContainInList(validPrdTypeList, currentPrdType)) return;
 
@@ -71,11 +77,9 @@ public class ClaimCommonValidator implements ClaimValidator {
 
     }
 
-    //금액검증(주문번호, 클레임 번호)
-    //1. 취소 금액 == 클레임 금액
-    //2. UI 데이터 == 쿼리 결과(환불가능금액) 검증데이터
     @Override
     public void verifyAmount(ClaimDto claimDto) throws Exception {
-
+        //취소완료, 반품완료, 교환완료 -> 주문결제테이블의 결제금액 - 취소금액 = 환불가능금액 인지 판단
+        //그 외의 것 -> UI 상의 취소 금액 = 주문금액 - 혜택금액 -배송비 = 취소금액
     }
 }
