@@ -1,5 +1,6 @@
 package com.himart.backend.claim.dto;
 
+import com.himart.backend.claim.model.OrderClaim;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ClaimDto {
+    private OrderClaim orderClaim;
     //클레임 타입
     private String claimType;
     //주문금액

@@ -2,14 +2,15 @@ package com.himart.backend.claim.utils.validator;
 
 import com.himart.backend.claim.code.ClaimException;
 import com.himart.backend.claim.code.ClaimProcessCode;
+import com.himart.backend.claim.code.ClaimProcessorType;
 import com.himart.backend.claim.dto.ClaimDto;
 import com.himart.backend.claim.model.OrderClaim;
 import com.himart.backend.claim.utils.define.ClaimDefine;
-import com.himart.backend.claim.code.ClaimValidatorType;
+import com.himart.backend.com.utils.FactoryTemplate;
 
 import java.util.List;
 
-public abstract class ClaimValidator {
+public abstract class ClaimValidator implements FactoryTemplate<ClaimProcessorType> {
 
     abstract public void isValid(ClaimDto claimDto) throws Exception;
 
@@ -42,8 +43,6 @@ public abstract class ClaimValidator {
     private boolean isContainInList(List<String> list, String target){
         return list.contains(target);
     }
-
-    abstract public ClaimValidatorType getType();
 
 }
 

@@ -11,12 +11,13 @@ import com.himart.backend.claim.code.ClaimValidatorType;
 import com.himart.backend.claim.utils.helper.ClaimDataManipulateHelper;
 import com.himart.backend.claim.utils.helper.MonitoringLogHelper;
 import com.himart.backend.claim.utils.validator.ClaimValidator;
+import com.himart.backend.com.utils.FactoryTemplate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @RequiredArgsConstructor
 @Log4j2
-public abstract class ClaimProcessor {
+public abstract class ClaimProcessor implements FactoryTemplate<ClaimProcessorType> {
 
    private final ClaimValidatorFactory claimValidatorFactory;
    protected final MonitoringLogHelper monitoringLogHelper;
@@ -65,7 +66,5 @@ public abstract class ClaimProcessor {
 
       claimValidator.verifyAmount(claimDto);
    }
-
-   public abstract ClaimProcessorType getType();
 
 }
