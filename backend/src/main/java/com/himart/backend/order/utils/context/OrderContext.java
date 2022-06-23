@@ -65,6 +65,7 @@ public class OrderContext {
     }
 
     private void insertOrderData(OrderDto orderDto){
+        log.info("주문 데이터 insert 로직이 진행된다.");
         //TODO orderDao.insertOrderData(orderDto);
     }
 
