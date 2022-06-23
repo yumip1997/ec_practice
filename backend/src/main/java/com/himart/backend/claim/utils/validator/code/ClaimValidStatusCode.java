@@ -27,7 +27,7 @@ public enum ClaimValidStatusCode {
     //교환접수
     EA(ClaimValidProcessCode.EA, ClaimValidProdutTypeCode.EA),
     //교환철회
-    EC(ClaimValidProcessCode.EC, ClaimValidProdutTypeCode.EC);
+    EW(ClaimValidProcessCode.EW, ClaimValidProdutTypeCode.EW);
 
     private final ClaimValidProcessCode claimValidProcessCode;
     private final ClaimValidProdutTypeCode claimValidProdutTypeCode;

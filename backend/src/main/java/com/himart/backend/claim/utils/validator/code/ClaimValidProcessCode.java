@@ -27,7 +27,7 @@ public enum ClaimValidProcessCode {
     //교환접수
     EA(Arrays.asList(ClaimProcessCode.DELIVERY_COMPLETE.code)),
     //교환철회
-    EC(Arrays.asList(ClaimProcessCode.EXCHANGE_ACCEPT.code));
+    EW(Arrays.asList(ClaimProcessCode.EXCHANGE_ACCEPT.code));
 
     private final List<String> validOrderStatusList;
 }

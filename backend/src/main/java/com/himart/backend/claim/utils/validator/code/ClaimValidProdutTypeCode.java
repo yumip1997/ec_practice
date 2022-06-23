@@ -27,7 +27,7 @@ public enum ClaimValidProdutTypeCode {
     //교환접수
     EA(Arrays.asList(ProductTypeCode.GENERAL.code)),
     //교환철회
-    EC(Arrays.asList(ProductTypeCode.GENERAL.code));
+    EW(Arrays.asList(ProductTypeCode.GENERAL.code));
 
     private final List<String> validProductTypeList;
 }
