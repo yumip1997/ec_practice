@@ -11,7 +11,6 @@ import com.himart.backend.order.utils.after.AfterStrategy;
 import com.himart.backend.order.utils.creator.DataStrategy;
 import com.himart.backend.order.utils.validator.OrderValidator;
 import com.himart.backend.payment.service.PayService;
-import com.himart.backend.payment.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
@@ -29,11 +28,25 @@ public class OrderContext {
         //TODO OrderDao에서 가져오기
         OrderProductView productView = new OrderProductView();
 
+        Long logKey = null;
+
         try{
+            //주문 모니터링 로그 생성
+            logKey = orderHistoryService.insertOrderHistory(orderRequest);
+
+            //파라미터 유혀성 검증
             validate(orderRequest);
 
+            //주문데이터생성
             OrderDto orderDto = dataStrategy.create(orderRequest, productView);
+
+            //결제호출
+            payService.approve(orderRequest.getPayInfo());
+
+            //주문데이터등록
             insertOrderData(orderDto);
+
+            //TODO 금액검증
 
             afterStrategy.call(orderRequest, orderDto);
         }catch (Exception e){
@@ -43,6 +56,7 @@ public class OrderContext {
     }
 
     private void validate(OrderRequest orderRequest) throws Exception {
+        log.info("파라미터 유효성 체크를 한다.");
         OrderValidator orderValidator = OrderValidator.findOrderValidatory(orderRequest);
         boolean isValid = orderValidator.test(new OrderValidationDto());
 

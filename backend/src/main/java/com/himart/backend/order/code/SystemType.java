@@ -3,6 +3,8 @@ package com.himart.backend.order.code;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
+
 @RequiredArgsConstructor
 @Getter
 public enum SystemType {
@@ -10,4 +12,11 @@ public enum SystemType {
     BO("BO");
 
     private final String code;
+
+    public static SystemType findSystemType(String systemTypeCode) throws Exception {
+        return Arrays.stream(SystemType.values())
+                .filter(orderType -> orderType.getCode().equals(systemTypeCode))
+                .findFirst()
+                .orElseThrow(() -> new Exception(OrderException.INVALID_SYSTEM_TYPE.msg));
+    }
 }
