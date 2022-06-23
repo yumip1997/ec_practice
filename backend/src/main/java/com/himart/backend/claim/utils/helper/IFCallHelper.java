@@ -12,7 +12,7 @@ public class IFCallHelper {
         System.out.println("쿠폰 복원 API 호출");
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRED)
     public void callPaymentIF(){
         System.out.println("결제 IF 호출");
     }
