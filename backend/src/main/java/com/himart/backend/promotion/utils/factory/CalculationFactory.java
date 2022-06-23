@@ -22,7 +22,7 @@ public class CalculationFactory {
         calculation.forEach(c -> map.put(c.getType(), c));
     }
 
-    public Calculation getCalculation(String prmTypeCode){
+    public Calculation getCalculation(PromotionType prmTypeCode){
         return map.get(prmTypeCode);
     }
 }

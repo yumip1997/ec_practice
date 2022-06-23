@@ -10,6 +10,7 @@ import com.himart.backend.promotion.dto.response.PriceDiscountResponseVO;
 import com.himart.backend.promotion.dto.response.ResponseBaseVO;
 import com.himart.backend.promotion.utils.factory.Calculation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,12 +18,15 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
+@Log4j2
 public class PriceDiscountCalculation implements Calculation {
 
     private final PrmDao prmDao;
 
     @Override
     public ResponseBaseVO getCalculationData(PrmRequestBase prmRequestBase) {
+        log.info("가격조정 할인금액 계산");
+
         PriceDiscountResponseVO priceDiscountResponseVO = new PriceDiscountResponseVO();
 
         List<Product> priceDiscountAppliedProductList = new ArrayList<>();

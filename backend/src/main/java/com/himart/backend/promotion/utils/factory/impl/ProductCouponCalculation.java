@@ -11,6 +11,7 @@ import com.himart.backend.promotion.dto.response.ProductCouponResponseVO;
 import com.himart.backend.promotion.dto.response.ResponseBaseVO;
 import com.himart.backend.promotion.utils.factory.Calculation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
+@Log4j2
 public class ProductCouponCalculation implements Calculation {
     
     private final PrmDao prmDao;
@@ -26,6 +28,8 @@ public class ProductCouponCalculation implements Calculation {
 
     @Override
     public ResponseBaseVO getCalculationData(PrmRequestBase prmRequestBase) {
+        log.info("상품쿠폰 할인금액 계산");
+
         ProductCouponResponseVO productCouponResponseVO = new ProductCouponResponseVO();
         
         List<ApplicablePromotionVO> applicablePrmList = getApplicablePromotionList(prmRequestBase);

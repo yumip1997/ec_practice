@@ -1,5 +1,6 @@
 package com.himart.backend.promotion.utils.factory;
 
+import com.himart.backend.com.utils.FactoryTemplate;
 import com.himart.backend.promotion.code.DcCode;
 import com.himart.backend.promotion.code.PromotionType;
 import com.himart.backend.promotion.dto.ApplicablePromotionVO;
@@ -10,11 +11,9 @@ import com.himart.backend.promotion.dto.response.ResponseBaseVO;
 import java.util.Comparator;
 import java.util.List;
 
-public interface Calculation {
+public interface Calculation extends FactoryTemplate<PromotionType> {
 
     ResponseBaseVO getCalculationData(PrmRequestBase prmRequestBase);
-
-    PromotionType getType();
 
     default PromotionVO getMaxBenefitPrm(List<PromotionVO> promotionVOList){
         return promotionVOList.stream()
